@@ -22,5 +22,12 @@ class Home extends CI_Controller {
         $data["islogin"] = $this->user->is_login();
         $this->load->view('template/index', $data);
     }
+    
+     public function campaign() { 
+        $data["user"] = $this->user->get_account_cookie();
+        $data["token"] = $data["user"] ['token'];
+        $data["islogin"] = $this->user->is_login();
+        $this->load->view('campaign/index', $data);
+    }
 
 }

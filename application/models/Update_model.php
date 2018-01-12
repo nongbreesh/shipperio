@@ -12,7 +12,7 @@ class Update_model extends CI_Model {
     }
 
     public function delete_shippingrate($id) {
-        $this->db->where('id', $id);
+        $this->db->where('id', $id); 
         if ($this->db->delete('shippingrate')):
             return true;
         else:
