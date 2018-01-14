@@ -255,10 +255,10 @@ class Select_model extends CI_Model
         return $query;
     }
 
-    function merchant($cond)
+    function user($cond)
     {
         $this->db->select('*');
-        $this->db->from('merchant');
+        $this->db->from('user');
         $this->db->where($cond);
         $query = $this->db->get();
         return $query;

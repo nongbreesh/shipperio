@@ -10,7 +10,7 @@ class User_model extends CI_Model {
     }
 
     function user_login($user_id = '', $password = '', $remember_me = '') {
-        $query = $this->db->query("SELECT * FROM merchant where email = '" . $user_id . "'  and password = '" . $password . "'  LIMIT 1");
+        $query = $this->db->query("SELECT * FROM user where email = '" . $user_id . "'  and password = '" . $password . "'  LIMIT 1");
         if ($query->num_rows() > 0) {
             $row = $query->row();
 
@@ -22,10 +22,8 @@ class User_model extends CI_Model {
 
             $set_cm_account['id'] = $row->id;
             $set_cm_account['name'] = $row->name;
-            $set_cm_account['webname'] = $row->webname;
             $set_cm_account['email'] = $row->email;
             $set_cm_account['description'] = $row->description;
-            $set_cm_account['lineid'] = $row->lineid;
             $set_cm_account['image'] = $row->image;
             $set_cm_account['token'] = $row->token;
             $set_cm_account = $this->encrypt->encode(serialize($set_cm_account));
@@ -68,7 +66,7 @@ class User_model extends CI_Model {
 
     function get_by_id($id) {
         $this->db->where('id', $id);
-        return $this->db->get('merchant');
+        return $this->db->get('user');
     }
 
 }

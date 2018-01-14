@@ -2,11 +2,9 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Service extends CI_Controller
-{
+class Service extends CI_Controller {
 
-    function __construct()
-    {
+    function __construct() {
         parent::__construct();
         $this->load->model('Insert_model', 'put');
         $this->load->model('Select_model', 'get');
@@ -18,8 +16,23 @@ class Service extends CI_Controller
         $this->load->library('common');
     }
 
-    public function lookupcustomer()
-    {
+    public function chargecredit() {
+        //init keys
+        $this->load->library('omise_api');
+        $this->omise_api->init('pkey_test_55ernhgh768hca1vipv', 'skey_test_55ernhgkqlapibx49k5');  // replace with your keys
+        //$card_token recieved from card.js submit form
+//$amount use int as Satang
+//$capture TRUE is capture immediately and set it false to capture later
+        $card_token = $this->input->post('card_token');
+        $charge = $this->omise_api->create($card_token, $amount = "10050", $description="xxx", $capture = true, $currency = 'thb');
+
+
+        $data["result"] = $charge;
+        $this->output->set_header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($data);
+    }
+
+    public function lookupcustomer() {
         $txttel = $this->input->post('txttel');
         $txtidcard = $this->input->post('txtidcard');
         $cond = array('tel' => $txttel, 'idcard' => $txtidcard);
@@ -28,8 +41,7 @@ class Service extends CI_Controller
         echo json_encode($data);
     }
 
-    public function getbilltoken()
-    {
+    public function getbilltoken() {
         $token = $this->input->post('token');
         $cond = array('token' => $token);
         $data['result'] = $this->get->billtoken($cond)->row();
@@ -38,8 +50,7 @@ class Service extends CI_Controller
         echo json_encode($data);
     }
 
-    public function getpromobilltokenformerchant($merchantid, $merchantuid)
-    {
+    public function getpromobilltokenformerchant($merchantid, $merchantuid) {
         $uniqid = $this->common->getToken(6);
         $input = array(
             'shipingrate' => 0,
@@ -59,8 +70,7 @@ class Service extends CI_Controller
         return false;
     }
 
-    public function getpromobill()
-    {
+    public function getpromobill() {
         $merchantid = $this->input->post('merchantid');
         $merchanttoken = $this->input->post('merchanttoken');
         $merchantuid = $this->input->post('merchantuid');
@@ -112,9 +122,7 @@ class Service extends CI_Controller
         echo json_encode($data);
     }
 
-
-    public function deletemerchantlineuid()
-    {
+    public function deletemerchantlineuid() {
         $id = $this->input->post('id');
 
         $input = array(
@@ -130,8 +138,7 @@ class Service extends CI_Controller
         echo json_encode($data);
     }
 
-    public function deletebilltoken()
-    {
+    public function deletebilltoken() {
         $id = $this->input->post('id');
 
         $input = array(
@@ -147,8 +154,7 @@ class Service extends CI_Controller
         echo json_encode($data);
     }
 
-    public function getaumphure()
-    {
+    public function getaumphure() {
         $provinceid = $this->input->post('provinceid');
         $cond = array('PROVINCE_ID' => $provinceid);
         $data['result'] = $this->get->amphur($cond)->result();
@@ -156,8 +162,7 @@ class Service extends CI_Controller
         echo json_encode($data);
     }
 
-    public function getmerchantbilldata()
-    {
+    public function getmerchantbilldata() {
         $token = $this->input->post('token');
         $cond = array('token' => $token, 'status' => '1');
         $billtoken = $this->get->billtoken($cond)->row();
@@ -168,8 +173,7 @@ class Service extends CI_Controller
         echo json_encode($data);
     }
 
-    public function getallbilltokenhtml()
-    {
+    public function getallbilltokenhtml() {
         $merchantid = $this->input->post('merchantid');
         $cond = array('merchantid' => $merchantid, 'status' => '1');
         $result = $this->get->billtoken($cond)->result();
@@ -195,9 +199,7 @@ class Service extends CI_Controller
         echo $html;
     }
 
-
-    public function getsalehistory()
-    {
+    public function getsalehistory() {
         $merchantid = $this->input->post('merchantid');
         $lineuid = $this->input->post('lineuid');
         $limit = $this->input->post('limit');
@@ -219,8 +221,7 @@ class Service extends CI_Controller
         echo $html;
     }
 
-    public function get_orderitemslist($items)
-    {
+    public function get_orderitemslist($items) {
         $html = "";
         $orderitems = $this->get->getorderitems($items);
         foreach ($orderitems as $item) {
@@ -229,9 +230,7 @@ class Service extends CI_Controller
         return rtrim($html, ",");
     }
 
-
-    public function saveadminuid()
-    {
+    public function saveadminuid() {
         $token = $this->input->post('token');
         $merchantid = $this->input->post('merchantid');
         $adminname = $this->input->post('adminname');
@@ -255,9 +254,7 @@ class Service extends CI_Controller
         echo json_encode($data);
     }
 
-
-    public function updateitemtobill()
-    {
+    public function updateitemtobill() {
         $itemid = $this->input->post('itemid');
         $data['result'] = $itemid;
 
@@ -265,8 +262,7 @@ class Service extends CI_Controller
         echo json_encode($data);
     }
 
-    public function getbillitiemswithstock()
-    {
+    public function getbillitiemswithstock() {
         $token = $this->input->post('token');
         $billtoken = $this->get->billtoken(array("token" => $token))->row();
         $items = $this->get->itemswithstock(array("a.merchantid" => $billtoken->merchantid, "a.status" => '1'), $billtoken->id)->result();
@@ -292,9 +288,7 @@ class Service extends CI_Controller
         echo $html;
     }
 
-
-    public function updatestock()
-    {
+    public function updatestock() {
 
         $data["user"] = $this->user->get_account_cookie();
         $data["token"] = $data["user"] ['token'];
@@ -323,7 +317,6 @@ class Service extends CI_Controller
             if ($amount != 0) {
                 $this->put->billtokenstock($input);
             }
-
         }
 
         $this->checkinglowstock($data["merchant"]->id, $billtokenid);
@@ -332,8 +325,7 @@ class Service extends CI_Controller
         echo json_encode($data);
     }
 
-    public function checkinglowstock($merchantid, $billtokenid)
-    {
+    public function checkinglowstock($merchantid, $billtokenid) {
 
         $billtoken = $this->get->billtoken(array("id" => $billtokenid))->row();
         $items = $this->get->itemswithstock(array("a.merchantid" => $merchantid, "a.status" => '1'), $billtokenid)->result();
@@ -347,15 +339,11 @@ class Service extends CI_Controller
                         $this->lineapi->pushmsg($user->lineuid, "STOCK($billtoken->name) : $item->name มีจำนวนเหลือ $stock");
                     }
                 }
-
             }
-
-
         }
     }
 
-    public function savebilltoken()
-    {
+    public function savebilltoken() {
         $token = $this->input->post('token');
         $editnotiusers = $this->input->post('editnotiusers');
         $merchantid = $this->input->post('merchantid');
@@ -430,8 +418,7 @@ class Service extends CI_Controller
         echo json_encode($data);
     }
 
-    public function getitem()
-    {
+    public function getitem() {
         $id = $this->input->post('id');
         $cond = array('id' => $id);
         $data['result'] = $this->get->items($cond)->row();
@@ -439,8 +426,7 @@ class Service extends CI_Controller
         echo json_encode($data);
     }
 
-    public function getimagecover()
-    {
+    public function getimagecover() {
         $id = $this->input->post('id');
         $cond = array('id' => $id);
         $data['result'] = $this->get->imagescover($cond)->row();
@@ -448,8 +434,7 @@ class Service extends CI_Controller
         echo json_encode($data);
     }
 
-    public function getarticle()
-    {
+    public function getarticle() {
         $id = $this->input->post('id');
         $cond = array('id' => $id);
         $data['result'] = $this->get->article($cond)->row();
@@ -457,9 +442,7 @@ class Service extends CI_Controller
         echo json_encode($data);
     }
 
-
-    public function removeimagecover()
-    {
+    public function removeimagecover() {
         $id = $this->input->post('id');
         $input = array(
             'id' => $id,
@@ -472,9 +455,7 @@ class Service extends CI_Controller
         echo json_encode($data);
     }
 
-
-    public function removearticle()
-    {
+    public function removearticle() {
         $id = $this->input->post('id');
         $input = array(
             'id' => $id,
@@ -487,14 +468,11 @@ class Service extends CI_Controller
         echo json_encode($data);
     }
 
-
-    public function getordersumbibilltoken($billtoken)
-    {
+    public function getordersumbibilltoken($billtoken) {
         return $this->get->getordersumbybilltoken($billtoken)->result();
     }
 
-    public function updateorderstatus()
-    {
+    public function updateorderstatus() {
         $items = $this->input->post('items');
         $status = $this->input->post('status');
         $itemarr = array();
@@ -512,8 +490,7 @@ class Service extends CI_Controller
         echo json_encode($data);
     }
 
-    public function exportorderexcel()
-    {
+    public function exportorderexcel() {
         $merchantid = $this->input->post('merchantid');
         $status = $this->input->post('exportorderstatus');
         if ($status != "0") {
@@ -529,8 +506,7 @@ class Service extends CI_Controller
         $this->excel->to_excel($result, 'order-excel' . $date);
     }
 
-    public function getorderstatus()
-    {
+    public function getorderstatus() {
         $merchantid = $this->input->post('merchantid');
         $status = $this->input->post('status');
         if ($status != "0") {
@@ -569,8 +545,7 @@ class Service extends CI_Controller
         echo $html;
     }
 
-    public function getorderstatuslabel($status, $closestatus)
-    {
+    public function getorderstatuslabel($status, $closestatus) {
         if ($closestatus == "1") {
             return " <div class=\"label label-table label-warning\">Canceled</div>";
         } else {
@@ -595,8 +570,7 @@ class Service extends CI_Controller
         // <div class="label label-table label-success">Paid</div>
     }
 
-    public function getshippingrateconfig()
-    {
+    public function getshippingrateconfig() {
         $id = $this->input->post('id');
         $cond = array('id' => $id);
         $data['result'] = $this->get->shippingrateconfig($cond)->row();
@@ -604,8 +578,7 @@ class Service extends CI_Controller
         echo json_encode($data);
     }
 
-    public function getpementmethod()
-    {
+    public function getpementmethod() {
         $id = $this->input->post('id');
         $cond = array('id' => $id);
         $data['result'] = $this->get->paymentmethod($cond)->row();
@@ -613,8 +586,7 @@ class Service extends CI_Controller
         echo json_encode($data);
     }
 
-    public function getcate()
-    {
+    public function getcate() {
         $id = $this->input->post('id');
         $cond = array('id' => $id);
         $data['result'] = $this->get->category($cond)->row();
@@ -622,17 +594,15 @@ class Service extends CI_Controller
         echo json_encode($data);
     }
 
-    public function getallcate()
-    {
+    public function getallcate() {
         $merchantid = $this->input->post('merchantid');
-        $cond = array('merchantid' => $merchantid , 'status	' => '1');
+        $cond = array('merchantid' => $merchantid, 'status	' => '1');
         $data['result'] = $this->get->category($cond)->result();
         $this->output->set_header('Content-Type: application/json; charset=utf-8');
         echo json_encode($data);
     }
 
-    public function getshippingrate()
-    {
+    public function getshippingrate() {
         $merchantid = $this->input->post('merchantid');
         $unit = $this->input->post('unit');
 
@@ -643,8 +613,7 @@ class Service extends CI_Controller
         echo json_encode($data);
     }
 
-    public function gettumbol()
-    {
+    public function gettumbol() {
         $aumpureid = $this->input->post('aumpureid');
         $cond = array('AMPHUR_ID' => $aumpureid);
         $data['result'] = $this->get->district($cond)->result();
@@ -652,8 +621,7 @@ class Service extends CI_Controller
         echo json_encode($data);
     }
 
-    public function submitorder()
-    {
+    public function submitorder() {
         $itemselected = $this->input->post('itemselected');
         $total = $this->input->post('total');
         $paymenttype = $this->input->post('paymenttype');
@@ -698,8 +666,7 @@ class Service extends CI_Controller
         echo json_encode($data);
     }
 
-    public function confirmpayment()
-    {
+    public function confirmpayment() {
         $orderid = $this->input->post('orderid');
         $ordertoken = $this->get->ordertoken(array('orderid' => $orderid))->row();
         $input = array(
@@ -716,8 +683,7 @@ class Service extends CI_Controller
         echo json_encode($data);
     }
 
-    public function cancelpayment()
-    {
+    public function cancelpayment() {
         $orderid = $this->input->post('orderid');
         $ordertoken = $this->get->ordertoken(array('orderid' => $orderid))->row();
         $input = array(

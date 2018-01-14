@@ -16,18 +16,57 @@ class Home extends CI_Controller {
         $this->load->library('lineapi');
     }
 
-    public function index() { 
-        $data["user"] = $this->user->get_account_cookie();
+    public function index() {
+        $data["user"] = $this->user->get_account_cookie(); 
+       // print_r($data["user"]);
         $data["token"] = $data["user"] ['token'];
         $data["islogin"] = $this->user->is_login();
+        $data["menu"] = "home";
         $this->load->view('template/index', $data);
     }
-    
-     public function campaign() { 
+
+    public function campaign() {
         $data["user"] = $this->user->get_account_cookie();
         $data["token"] = $data["user"] ['token'];
+        $data["menu"] = "campaign";
         $data["islogin"] = $this->user->is_login();
         $this->load->view('campaign/index', $data);
+    }
+
+    public function item($id) {
+        $data["user"] = $this->user->get_account_cookie();
+        $data["token"] = $data["user"] ['token'];
+        $data["menu"] = "";
+        $data["islogin"] = $this->user->is_login();
+        $this->load->view('campaign/item', $data);
+    }
+
+    public function cart() {
+        $data["user"] = $this->user->get_account_cookie();
+        $data["token"] = $data["user"] ['token'];
+        $data["menu"] = "";
+        $data["islogin"] = $this->user->is_login();
+        $this->load->view('cart/index', $data);
+    }
+
+    public function checkout() {
+
+
+        $data["user"] = $this->user->get_account_cookie();
+        $data["token"] = $data["user"] ['token'];
+        $data["menu"] = "";
+        $data["islogin"] = $this->user->is_login();
+        $this->load->view('cart/checkout', $data);
+    }
+
+    public function ordercompleted() {
+
+
+        $data["user"] = $this->user->get_account_cookie();
+        $data["token"] = $data["user"] ['token'];
+        $data["menu"] = "";
+        $data["islogin"] = $this->user->is_login();
+        $this->load->view('cart/completed', $data);
     }
 
 }

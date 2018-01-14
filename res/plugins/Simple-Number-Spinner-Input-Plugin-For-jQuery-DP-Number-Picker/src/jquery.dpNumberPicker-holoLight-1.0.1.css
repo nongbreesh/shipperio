@@ -1,0 +1,45 @@
+ 
+.dp-numberPicker, .dp-numberPicker-add, .dp-numberPicker-sub, .dp-numberPicker-input {
+	display: inline-block;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	vertical-align: top; 
+}
+.dp-numberPicker { 
+	border-radius: 3px;
+}
+.dp-numberPicker-add, .dp-numberPicker-sub {
+	width: 30px;
+	font-size: 25px;
+	cursor: pointer;
+	-moz-user-select: none; 
+	-khtml-user-select: none; 
+	-webkit-user-select: none; 
+	-o-user-select: none; 
+	background-color: #1a53f0;
+	color: white;
+	font-weight: 700; 
+}
+.dp-numberPicker-add {
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px; 
+}
+.dp-numberPicker-sub {
+	border-top-left-radius: 3px;
+	border-bottom-left-radius: 3px; 
+}
+.dp-numberPicker-sub.disabled, .dp-numberPicker-add.disabled {
+	background-color: #d8d8d8;
+}
+.dp-numberPicker-input {
+	width: 50px;
+	font-size: 18px;
+	background-color: #eeeeee;
+	border: 0; 
+}
+.dp-numberPicker-input:disabled {
+	background-color: #eeeeee;
+}

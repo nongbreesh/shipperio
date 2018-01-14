@@ -2,7 +2,7 @@
     <div class="bottom-menu">
         <div class="container">
             <div class="row text-center">
-                <img src="<?= base_url("res/img/credit_footer.png") ?>" />
+                <img src="<?= base_url("res/img/credit_footer.png") ?>" style="max-width: 100%;" />
                 <br/> <br/>
                 <div class="col-xs-12 text-center">
                     <img src="<?= base_url("res/img/web-logo.png") ?>" style="width: 50px;"/>

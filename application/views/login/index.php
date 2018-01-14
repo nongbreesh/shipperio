@@ -6,7 +6,7 @@
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url("res/account/plugins/images/favicon.png") ?>">
     <title>Perdbill | เข้าสู่ระบบ</title>
-        <link href="https://fonts.googleapis.com/css?family=Prompt" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Prompt" rel="stylesheet">
     <!-- Bootstrap Core CSS -->
     <link href="<?= base_url("res/account/bootstrap/dist/css/bootstrap.min.css") ?>" rel="stylesheet">
     <!-- Menu CSS -->
@@ -64,87 +64,92 @@
                 </div>
             </div>
         </div>
-        <div class="new-login-box">
-            <div class="text-center" style="font-family:'Prompt', Arial, sans-serif;font-size: 24px;color:#5d5d5d " ">
-                จะเปิดให้บุคคลทั่วไปลงทะเบียนเร็วๆนี้...
+        <div class="new-login-box"> 
+            <div class="white-box">
+
+                <?php if (!$login): ?>
+                    <div class="alert alert-success" id="passwordnotmath">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        ชื่อผู้ใช้ / รหัสผ่านผิดพลาด
+                    </div>
+                <?php endif; ?>
+                <?php if ($register): ?>
+                    <div class="alert alert-success" id="passwordnotmath">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        สมัครสมาชิกเรียบร้อย
+                    </div>
+                <?php endif; ?>
+                <h3 class="box-title m-b-0" style="font-weight: bold;">เข้าสู่ระบบ</h3>
+                <form class="form-horizontal new-lg-form" id="loginform" action="" method="post"
+                      enctype="multipart/form-data">
+                    <div class="form-group  m-t-20">
+                        <div class="col-xs-12">
+                            <label style="font-weight: bold;">อีเมลล์</label>
+                            <input class="form-control" type="text" name="email" required placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <label style="font-weight: bold;">รหัสผ่าน</label>
+                            <input class="form-control" type="password" name="password" required placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+
+                            <a href="javascript:void(0)" id="to-recover" class="text-dark pull-right"><i
+                                    class="fa fa-lock m-r-5"></i> ลืมรหัสผ่าน?</a></div>
+                    </div>
+                    <div class="form-group text-center m-t-20">
+                        <div class="col-xs-12">
+                            <button class="btn btn-info btn-lg btn-block  text-uppercase waves-effect waves-light"
+                                    type="submit">เข้าสู่ระบบ
+                            </button>
+                        </div>
+                    </div>
+                     <div class="row">
+                         <div class="col-xs-12 text-center">
+                             หรือ
+                         </div>
+                     </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 m-t-10 text-center">
+                            <div class="social">
+                                <a href="javascript:void(0)" class="btn  btn-facebook btn-block   btn-lg" data-toggle="tooltip"  title="Login with Facebook"> 
+                                    <i aria-hidden="true" class="fa fa-facebook"></i> Continue with Facebook
+                                </a> </div>
+                        </div>
+                    </div>
+                    <div class="form-group m-b-0">
+                        <div class="col-sm-12 text-center">
+                            <p class="text-center">ยังไม่มีบัญชี? <a class="text-primary m-l-5"
+                                                                     href="<?= base_url("register") ?>"
+                                                                     style="font-weight: bold;"> คลิกที่นี่ </a>
+                                เพื่อไปหน้าสมัครสมาชิก</p>
+                        </div>
+                    </div>
+                </form>
+                <form class="form-horizontal" id="recoverform" action="index.html">
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <h3>Recover Password</h3>
+                            <p class="text-muted">Enter your Email and instructions will be sent to you! </p>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="text" required="" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="form-group text-center m-t-20">
+                        <div class="col-xs-12">
+                            <button class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light"
+                                    type="submit">Reset
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <!--     <div class="white-box">
-                   
-            <?php if (!$login): ?>
-                           <div class="alert alert-success" id="passwordnotmath">
-                               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                               ชื่อผู้ใช้ / รหัสผ่านผิดพลาด
-                           </div>
-            <?php endif; ?>
-            <?php if ($register): ?>
-                           <div class="alert alert-success" id="passwordnotmath">
-                               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                               สมัครสมาชิกเรียบร้อย
-                           </div>
-            <?php endif; ?>
-                   <h3 class="box-title m-b-0" style="font-weight: bold;">เข้าสู่ระบบ</h3>
-                   <form class="form-horizontal new-lg-form" id="loginform" action="" method="post"
-                         enctype="multipart/form-data">
-                       <div class="form-group  m-t-20">
-                           <div class="col-xs-12">
-                               <label style="font-weight: bold;">อีเมลล์</label>
-                               <input class="form-control" type="text" name="email" required placeholder="Email">
-                           </div>
-                       </div>
-                       <div class="form-group">
-                           <div class="col-xs-12">
-                               <label style="font-weight: bold;">รหัสผ่าน</label>
-                               <input class="form-control" type="password" name="password" required placeholder="Password">
-                           </div>
-                       </div>
-                       <div class="form-group">
-                           <div class="col-md-12">
-       
-                               <a href="javascript:void(0)" id="to-recover" class="text-dark pull-right"><i
-                                           class="fa fa-lock m-r-5"></i> ลืมรหัสผ่าน?</a></div>
-                       </div>
-                       <div class="form-group text-center m-t-20">
-                           <div class="col-xs-12">
-                               <button class="btn btn-info btn-lg btn-block  text-uppercase waves-effect waves-light"
-                                       type="submit">เข้าสู่ระบบ
-                               </button>
-                           </div>
-                       </div>
-                                           <div class="row">
-                                               <div class="col-xs-12 col-sm-12 col-md-12 m-t-10 text-center">
-                                                   <div class="social"><a href="javascript:void(0)" class="btn  btn-facebook" data-toggle="tooltip"  title="Login with Facebook"> <i aria-hidden="true" class="fa fa-facebook"></i> </a> <a href="javascript:void(0)" class="btn btn-googleplus" data-toggle="tooltip"  title="Login with Google"> <i aria-hidden="true" class="fa fa-google-plus"></i> </a> </div>
-                                               </div>
-                                           </div>
-                       <div class="form-group m-b-0">
-                           <div class="col-sm-12 text-center">
-                               <p class="text-center">ยังไม่มีบัญชี? <a class="text-primary m-l-5"
-                                                                        href="<?= base_url("register") ?>"
-                                                                        style="font-weight: bold;"> คลิกที่นี่ </a>
-                                   เพื่อไปหน้าสมัครสมาชิก</p>
-                           </div>
-                       </div>
-                   </form>
-                   <form class="form-horizontal" id="recoverform" action="index.html">
-                       <div class="form-group ">
-                           <div class="col-xs-12">
-                               <h3>Recover Password</h3>
-                               <p class="text-muted">Enter your Email and instructions will be sent to you! </p>
-                           </div>
-                       </div>
-                       <div class="form-group ">
-                           <div class="col-xs-12">
-                               <input class="form-control" type="text" required="" placeholder="Email">
-                           </div>
-                       </div>
-                       <div class="form-group text-center m-t-20">
-                           <div class="col-xs-12">
-                               <button class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light"
-                                       type="submit">Reset
-                               </button>
-                           </div>
-                       </div>
-                   </form>
-               </div>-->
         </div>
 
 

@@ -88,10 +88,10 @@
         <div style="padding-top:20px;padding-bottom:20px" >
             <div class="row"> 
                 <div class="col-lg-6   text-grey text-left">
-                    <img style="width:100%" src="https://assets.omise.co/assets/home/checkout-form-desktop-878e709ade692b18b4e312f93597e2519ca17b189b8b4bd9f3874c4abc5cf177.png" />
+                    <img style="width:100%" src="<?= base_url("res/img/shipperio-flow.png") ?>" />
                 </div>
                 <div class="col-lg-6   text-grey text-left">
-                    <h5 class="" style="color:#1A53F0;    font-family: 'Prompt', Arial, sans-serif;">ชำระเงินผ่านบัตรเครดิต</h2>
+                    <h5 class="" style="color:#1A53F0;    font-family: 'Prompt', Arial, sans-serif;margin-top: 90px;">ชำระเงินผ่านบัตรเครดิต</h2>
                         <p class="">ปลอดภัยไปอีกขั้นเมื่อชำระเงินผ่านบัตรเครดิตเข้าบัญชี Shipper โดยตรง ยอดเงินจะถูกหักให้ผู้ขายสินค้าก็ต่อเมื่อ ผู้รับสินค้าได้รับสินค้าเรียบร้อย เพื่อป้องกันปัญหาผู้รับหิ้วสินค้าโกง 
                             <br/>โดยสังเกตุเครื่องหมาย   <img style="width:30px" src="<?= base_url("res/img/shield.png") ?>" /> ที่หน้าแคมเปญ</p>
                 </div>
@@ -186,7 +186,7 @@
                     </div>
 
                     <div class="col-md-4 hidden-xs"> 
-                        <a class="btn-blue" style="margin-top: 45px;" href="http://localhost/perdbill/login">ดูสินค้าทั้งหมด!</a>
+                        <a class="btn-blue" style="margin-top: 45px;" href="<?= base_url("login") ?>">ดูสินค้าทั้งหมด!</a>
                     </div>
                 </div>
             </div>
@@ -197,21 +197,21 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h4 style="    font-family: 'Prompt', Arial, sans-serif;">ค่าบริการเพียง <h1 style="color:#1A53F0">5.65%</h1> ต่อแคมเปญ</h4>
+                    <h4 style="font-family: 'Prompt', Arial, sans-serif;">ค่าบริการเพียง</h4> <h1 style="color:#1A53F0">3%</h1> ต่อแคมเปญ สำหรับผู้รับหิ้ว
                     <br/>
                     <br/>
                     <div style="max-width:700px;margin:0 auto;">
                         <h5 style="    font-family: 'Prompt', Arial, sans-serif;">ตัวอย่างการคำนวณค่าบริการ</h5>
                         <p style="text-align:left">
-                            เราคิดค่าบริการในการทำรายการที่ 5.65%  ตัวอย่างเช่น เมื่อมียอดสั่งซื้อรวมทั้งหมดต่อแคมเปญ 1,000 บาทจากผู้ซื้อ ค่าบริการจะเท่ากับ 56.50 บาท (คิดจาก 5.65%) 
-                            และเมื่อรวมกับภาษีมูลค่าเพิ่ม 7% (คิดเป็น 3.96 บาท) ค่าบริการสุทธิของรายการนี้คือ 60.46 บาท 
-                            ซึ่งเราจะหักออกจากยอด 1,000 บาท และจ่ายเงินจำนวน 939.54 บาทไปยังบัญชีเจ้าของแคมเปญ
+                            เราคิดค่าบริการในการทำรายการที่ 2%  ตัวอย่างเช่น เมื่อมียอดสั่งซื้อรวมทั้งหมดต่อแคมเปญ 1,000 บาทจากผู้ซื้อ ค่าบริการจะเท่ากับ 30 บาท (คิดจาก 3%) 
+                            และเมื่อรวมกับภาษีมูลค่าเพิ่ม 7% (คิดเป็น 2.1 บาท) ค่าบริการสุทธิของรายการนี้คือ 32.10 บาท 
+                            ซึ่งเราจะหักออกจากยอด 1,000 บาท และจ่ายเงินจำนวน 967.90 บาทไปยังบัญชีเจ้าของแคมเปญ
                         </p>
                         <div class="code text text-left"> 
                             Charge Amount: 1,000.00 +  
-                            <br/>Shipper Fee:        56.50 -  
-                            <br/>Fee VAT:           3.96 -
-                            <br/>Your Balance:    939.54
+                            <br/>Shipperio Fee:        30.00 -  
+                            <br/>Fee VAT:           2.10 -
+                            <br/>Your Balance:    967.90
                         </div>
                     </div>
                 </div>
@@ -223,7 +223,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <a class="startusing" href="http://localhost/perdbill/login">เริ่มสร้างแคมเปญ!</a>
+                    <a class="startusing" href="<?= base_url("login") ?>">เริ่มสร้างแคมเปญ!</a>
                 </div>
             </div>
         </div>

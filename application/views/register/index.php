@@ -53,13 +53,13 @@
 <section id="wrapper" class="new-login-register" style="overflow-y: scroll;">
     <div class="lg-info-panel">
         <div class="inner-panel">
-            <a href="<?= base_url() ?>" class="p-20 di"><img
-                        src="<?= base_url("res/account/plugins/images/admin-logo.png") ?>" style="width: 50px;"></a>
+          <a href="<?= base_url() ?>" class="p-20 di"><img
+                        src="<?= base_url("res/img/web-logo.png") ?>" style="width: 50px;"> </a>
             <div class="lg-content">
-                <h2>Perdbill - เปิดบิล</h2>
-                <p class="text-muted">บริการเปิดบิลผ่าน LINE BOT ง่ายต่อการขายของออนไลน์ สะดวกต่อนักขายมืออาชีพ</p>
-                <a href="<?= base_url("login") ?>" class="btn btn-rounded  p-l-20 p-r-20 btn-success" style="background: #21bf64;
-    border: 1px solid #1db15c;">ต้องการเข้าสู่ระบบ?</a>
+               <h2>Shipperio</h2>
+                 <p class="text-muted">แพลตฟอร์มรับหิ้วสินค้าออนไลน์ ซื้อง่ายปลอดภัยได้ของชัวร์</p>
+                <a href="<?= base_url("login") ?>" class="btn btn-rounded  p-l-20 p-r-20 btn-success" style="background: #1A53F0;
+                       border: 1px solid #1A53F0;">ต้องการเข้าสู่ระบบ?</a>
             </div>
         </div>
     </div>
@@ -109,27 +109,8 @@
                         <label style="font-weight: bold;">อีเมลล์</label>
                         <input class="form-control" type="text" name="email" required placeholder="Email">
                     </div>
-                </div>
-                <div class="form-group  m-t-20">
-                    <div class="col-xs-12">
-                        <label style="font-weight: bold;">Line ID</label>
-                        <input class="form-control" type="lineid" name="lineid" required placeholder="Line ID">
-                    </div>
-                </div>
-                <div class="form-group  m-t-20">
-                    <div class="col-xs-12">
-                        <label style="font-weight: bold;">ชื่อร้าน <code>ภาษาอังกฤษและตัวเลขเท่านั้น</code></label>
-                        <input class="form-control" type="name" name="name" id="name" required placeholder="ชื่อร้าน">
-                        <input name="webname" id="webname" type="hidden">
-                        <i class="text-success" id="shopname"></i>
-                    </div>
-                </div>
-                <div class="form-group  m-t-20">
-                    <div class="col-xs-12">
-                        <label style="font-weight: bold;">รายละเอียดร้านค่้า</label>
-                        <input class="form-control" type="name" name="name" id="name" required placeholder="รายละเอียด">
-                    </div>
-                </div>
+                </div> 
+               
                 <div class="form-group">
 
                     <div class="col-xs-12">
