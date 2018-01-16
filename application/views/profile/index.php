@@ -44,56 +44,53 @@
 
         <div class="container" style="max-width:960px;">
             <div class="row"> 
-                <div class="col-xs-4">
-                    <div class="card-campaign" style="padding-bottom: 0px;">
-                        <ul class="profile">
-                            <li><a href="#" class="active">ข้อมูลบัญชี</a></li>
-                            <li><a href="#">ออเดอร์</a></li>
-                            <li><a href="#">เบอร์โทร</a></li>
-                            <li><a href="#">บัญชีธนาคาร</a></li>
-                            <li style="border: 0px;"><a href="<?= base_url("logout") ?>">ออกจากระบบ</a></li>
-                        </ul>
-
-                    </div>
-                </div>
+                <?php $this->load->view("profile/sidebar"); ?>
 
                 <div class="col-xs-8">
                     <div class="card-campaign" style="padding:15px;">
-                        <h4 class="customtitle text-black">บัญชี</h4> 
-                        <div class="row">
-                            <div class="col-xs-12 text-center">
-                                <img style="width: 120px;" class="img img-circle" src="<?= $user['image'] ?>" />
+                        <?php if ($updated == "true"): ?>
+                            <div class="alert alert-success" id="passwordnotmath">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                อัพเดทข้อมูลเรียบร้อย
                             </div>
-                        </div>
+                        <?php endif; ?>
+                        <form method="post" >
+                            <h4 class="customtitle text-black">บัญชี</h4> 
+                            <div class="row">
+                                <div class="col-xs-12 text-center">
+                                    <img style="width: 120px;" class="img img-circle" src="http://graph.facebook.com/<?= $userdetail ? $userdetail->fbid : '' ?>/picture?type=square" />
+                                </div>
+                            </div>
 
-                        <div class="row">
-                            <div class="col-xs-12 text-center" style="margin-top: 15px;">
-                                <button  class="btn btn-campaign">อัพโหลดรูปภาพ</button>
+                            <!--                        <div class="row">
+                                                        <div class="col-xs-12 text-center" style="margin-top: 15px;">
+                                                            <button  class="btn btn-campaign">อัพโหลดรูปภาพ</button>
+                                                        </div>
+                                                    </div>-->
+                            <div class="devider" style="margin-top: 15px;"></div>
+                            <div class="row">
+                                <div class="col-xs-12 text-center" style="margin-top: 15px;">
+                                    <h5 class="customtitle">อีเมลล์ : <?= $userdetail ? $userdetail->email : '' ?></h5>
+                                </div>
                             </div>
-                        </div>
-                        <div class="devider" style="margin-top: 15px;"></div>
-                        <div class="row">
-                            <div class="col-xs-12 text-center" style="margin-top: 15px;">
-                                <h5 class="customtitle">อีเมลล์ : <?= $user['email'] ?></h5>
-                            </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-xs-12"style="margin-top: 15px;">
-                                <input type="text"  name="billing_first_name" id="billing_first_name" placeholder="ชื่อ" value=""   autofocus="autofocus" class="checkout-input">
+                            <div class="row">
+                                <div class="col-xs-12"style="margin-top: 15px;">
+                                    <input type="text"  required="required" name="first_name" id="first_name" placeholder="ชื่อ" value="<?= $userdetail ? $userdetail->firstname : '' ?>"   autofocus="autofocus" class="form-control">
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-xs-12"style="margin-top: 15px;">
-                                <input type="text"  name="billing_first_name" id="billing_first_name" placeholder="นามสกุล" value=""   autofocus="autofocus" class="checkout-input">
+                            <div class="row">
+                                <div class="col-xs-12"style="margin-top: 15px;">
+                                    <input type="text" required="required" name="last_name" id="last_name" placeholder="นามสกุล" value="<?= $userdetail ? $userdetail->lastname : '' ?>"   autofocus="autofocus" class="form-control">
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 text-center" style="margin-top: 15px;">
-                                <button  class="btn btn-campaign">บันทึก</button>
+                            <div class="row">
+                                <div class="col-xs-12 text-center" style="margin-top: 15px;">
+                                    <button type="submit"  class="btn btn-campaign">บันทึก</button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
 

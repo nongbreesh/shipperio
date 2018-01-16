@@ -37,141 +37,147 @@
                 </div>   
 
             </div>
- 
 
 
-    </header> 
 
-    <div class="container">
-        <div class="row">
-            <!--            <div class="col-xs-12 col-md-2">
-                            <h6 class="customtitle">ประเทศ</h6> 
-                            <ul class="nav">
-                                <li><a href="#">ไทย</a></li>
-                                <li><a href="#">ญี่ปุ่น</a></li>
-                                <li><a href="#">เกาหลี</a></li>
-                                <li><a href="#">จีน</a></li>
-                            </ul>
-                        </div>-->
+        </header> 
 
-            <div class="col-xs-12">
-                <div class="row text-center">
-                    <h5 class="customtitle text-black">รถเข็นของคุณ</h5>
-                    <div class="devider" ></div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12" style="overflow-x: scroll;">
-                        <table class="table tb-cart">
-                            <thead> 
-                                <tr> 
-                                    <th>#</th>
-                                    <th>#</th>
-                                    <th>รายการสินค้า</th>
-                                    <th>ราคา</th> 
-                                    <th>จำนวน</th> 
-                                    <th>ยอดรวม</th> 
-                                </tr>
-                            </thead>
-                            <tbody> 
+        <div class="container">
+            <div class="row">
+                <!--            <div class="col-xs-12 col-md-2">
+                                <h6 class="customtitle">ประเทศ</h6> 
+                                <ul class="nav">
+                                    <li><a href="#">ไทย</a></li>
+                                    <li><a href="#">ญี่ปุ่น</a></li>
+                                    <li><a href="#">เกาหลี</a></li>
+                                    <li><a href="#">จีน</a></li>
+                                </ul>
+                            </div>-->
 
-                               
-                                <tr> 
-                                    <th scope="row">
-                                        <a href="#" class="remove" title="Remove this item" >X</a>
-                                    </th> 
-                                    <td><img width="100" height="100" src="https://www.dhresource.com/0x0s/f2-albu-g2-M01-A1-E5-rBVaG1ZJdrGAVObbAAD3P8iQUto609.jpg/hot-new-the-peanuts-movie-8-snoopy-plush.jpg"  ></td> 
-                                    <td>ตุ๊กตาสนูปปี้</td> 
-                                    <td>฿2,600.00</td> 
-                                    <td><input type="number" class="input-text qty text" value="1" /></td> 
-                                    <td>฿2,600.00</td> 
-                                </tr> 
- 
-                                <tr> 
-                                    <th scope="row">
-                                        <a href="#" class="remove" title="Remove this item" >X</a>
-                                    </th> 
-                                    <td><img width="100" height="100" src="https://d9xxmxgglu6pp.cloudfront.net/wp-content/uploads/2017/10/C02-180x180.png"  ></td> 
-                                    <td>ตุ๊กตาสนูปปี้</td> 
-                                    <td>฿2,600.00</td> 
-                                    <td><input type="number" class="input-text qty text" value="1" /></td> 
-                                    <td>฿2,600.00</td> 
-                                </tr> 
-
-                                <tr> 
-                                    <th scope="row">
-                                        <a href="#" class="remove" title="Remove this item" >X</a>
-                                    </th> 
-                                    <td><img width="100" height="100" src="https://d9xxmxgglu6pp.cloudfront.net/wp-content/uploads/2017/10/C07-180x180.jpeg" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" srcset="https://d9xxmxgglu6pp.cloudfront.net/wp-content/uploads/2017/10/C07-180x180.jpeg 180w, https://d9xxmxgglu6pp.cloudfront.net/wp-content/uploads/2017/10/C07-150x150.jpeg 150w, https://d9xxmxgglu6pp.cloudfront.net/wp-content/uploads/2017/10/C07-290x290.jpeg 290w, https://d9xxmxgglu6pp.cloudfront.net/wp-content/uploads/2017/10/C07-270x270.jpeg 270w, https://d9xxmxgglu6pp.cloudfront.net/wp-content/uploads/2017/10/C07-300x300.jpeg 300w, https://d9xxmxgglu6pp.cloudfront.net/wp-content/uploads/2017/10/C07-600x600.jpeg 600w" sizes="(max-width: 180px) 100vw, 180px"></td> 
-                                    <td>ตุ๊กตาสนูปปี้</td> 
-                                    <td>฿2,600.00</td> 
-                                    <td><input type="number" class="input-text qty text" value="1" /></td> 
-                                    <td>฿2,600.00</td> 
-                                </tr> 
-                                <tr> 
-                                    <th scope="row">
-                                        <a href="#" class="remove" title="Remove this item" >X</a>
-                                    </th> 
-                                    <td><img width="100" height="100" src="https://d9xxmxgglu6pp.cloudfront.net/wp-content/uploads/2017/10/C07-180x180.jpeg" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" srcset="https://d9xxmxgglu6pp.cloudfront.net/wp-content/uploads/2017/10/C07-180x180.jpeg 180w, https://d9xxmxgglu6pp.cloudfront.net/wp-content/uploads/2017/10/C07-150x150.jpeg 150w, https://d9xxmxgglu6pp.cloudfront.net/wp-content/uploads/2017/10/C07-290x290.jpeg 290w, https://d9xxmxgglu6pp.cloudfront.net/wp-content/uploads/2017/10/C07-270x270.jpeg 270w, https://d9xxmxgglu6pp.cloudfront.net/wp-content/uploads/2017/10/C07-300x300.jpeg 300w, https://d9xxmxgglu6pp.cloudfront.net/wp-content/uploads/2017/10/C07-600x600.jpeg 600w" sizes="(max-width: 180px) 100vw, 180px"></td> 
-                                    <td>ตุ๊กตาสนูปปี้</td> 
-                                    <td>฿2,600.00</td> 
-                                    <td><input type="number" class="input-text qty text" value="1" /></td> 
-                                    <td>฿2,600.00</td> 
-                                </tr> 
-                            </tbody>
-                            <tfoot>
-                                <tr> 
-                                    <th  colspan="5"> 
-                                    </th> 
-                                    <th>  <button  class="btn btn-campaign">อัพเดทรถเข็น</button></th>  
-                                </tr> 
-                                <tr> 
-                                    <th  colspan="5">
-                                        รวมค่าสินค้า
-                                    </th> 
-                                    <th>฿1,666.00</th>  
-                                </tr> 
-                                <tr> 
-                                    <th  colspan="5">
-                                        Fee
-                                    </th> 
-                                    <th>฿150.00</th>  
-                                </tr> 
-                                <tr> 
-                                    <th  colspan="5">
-                                        รวมทั้งหมด
-                                    </th> 
-                                    <th>฿1756.00</th>  
-                                </tr> 
-                            </tfoot>
-                        </table>
+                <div class="col-xs-12">
+                    <div class="row text-center">
+                        <h5 class="customtitle text-black">รถเข็นของคุณ</h5>
+                        <div class="devider" ></div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12"  style="margin-top: 25px;">
-                        <a href="<?= base_url("checkout")?>"  class="btn btn-campaign cart">ดำเนินการต่อ</a>
-                    </div>
-                </div>
+                    <?php if (count($cartdata) > 0): ?>
+                        <div class="row">
+                            <div class="col-xs-12" style="overflow-x: scroll;">
+                                <form method="post">
+                                    <table class="table tb-cart">
+                                        <thead> 
+                                            <tr> 
+                                                <th>#</th>
+                                                <th>#</th>
+                                                <th>รายการสินค้า</th>
+                                                <th>ราคา</th> 
+                                                <th>จำนวน</th> 
+                                                <th>ยอดรวม</th> 
+                                            </tr>
+                                        </thead>
+                                        <tbody> 
+                                            <?php
+                                            $summary = 0;
+                                            $total;
+                                            foreach ($cartdata as $row):
+                                                ?>
+                                                <tr> 
+                                                    <th scope="row">
+                                                        <a href="<?= base_url("removecart/" . $row["id"] . "") ?>" class="remove" title="Remove this item" >X</a>
+                                                    </th> 
+                                                    <td><a href="<?= base_url("item/" . $row["id"] . "") ?>"><img width="100" height="100" src="<?= $row["image"] ?>"  ></a></td> 
+                                                    <td><a href="<?= base_url("item/" . $row["id"] . "") ?>"><?= $row["title"] ?></a></td> 
+                                                    <td>฿<?= number_format($row["price"] + $row["fee"], 2) ?></td> 
+                                                    <td><input type="number" name="amount[]" class="input-text form-control qty text" value="<?= $row["amount"] ?>" min="1" /></td> 
+                                                    <td>฿<?= number_format(($row["price"] + $row["fee"]) * $row["amount"], 2) ?></td> 
+                                                </tr> 
+                                                <?php
+                                                $summary += ($row["price"] + $row["fee"]) * $row["amount"];
+                                                ?>
+                                            <?php endforeach; ?> 
+                                        </tbody>
+                                        <tfoot>
+                                            <?php if (count($cartdata) > 0): ?>
+                                                <tr> 
+                                                    <th  colspan="5"> 
+                                                    </th> 
+                                                    <th>  <button  name="btn_update" type="submit" class="btn btn-campaign">อัพเดทรถเข็น</button></th>  
+                                                </tr>
+                                            <?php endif; ?>
+                                            <tr> 
+                                                <th  colspan="5">
+                                                    รวมค่าสินค้า
+                                                </th> 
+                                                <th>฿<?= number_format($summary, 2) ?></th>  
+                                            </tr> 
+                                            <tr> 
+                                                <th  colspan="5">
+                                                    ค่าธรรมเนียม
+                                                </th> 
+                                                <th>฿<?= number_format($summary * CHARGE, 2) ?></th>  
+                                                <?php
+                                                $total = $summary + ($summary * CHARGE);
+                                                ?>
+                                            </tr> 
+                                            <tr > 
+                                                <th  colspan="5" style="color: #000 !important;">
+                                                    รวมทั้งหมด
+                                                </th> 
+                                                <th style="color: #000 !important;">฿<?= number_format($total, 2) ?></th>  
+                                            </tr> 
+                                        </tfoot>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12"  style="margin-top: 25px;">
+                                <?php if (count($cartdata) > 0): ?>
+                                    <a href="<?= base_url("checkout") ?>"  class="btn btn-campaign cart">ดำเนินการต่อ</a>
+                                <?php else: ?>
+                                    <a href="javascript:;"  class="btn btn-campaign cart disabled">ดำเนินการต่อ</a>
+                                <?php endif; ?>
 
+                            </div>
+                        </div>
+                    <?php else: ?>
+                        <div class="row">
+                            <div class="col-xs-12 text-center"  style="margin-top: 25px;">
+                                <img style="width: 350px;" src="<?= base_url("res/img/shipperio4.png") ?>" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 text-center"  style="margin-top: 25px;">
+                                <p class="customtitle">ไม่มีสินค้าในรถเข็นของคุณ</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 text-center"  style="margin-top: 25px;">
+                                 <a href="<?= base_url("campaign") ?>"  class="btn btn-campaign cart">ไปดูสินค้า</a>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
+
+                </div>
             </div>
         </div>
-    </div>
 
-    <?php $this->load->view('template/footer'); ?>
+        <?php $this->load->view('template/footer'); ?>
 
-</body>
-<script type="text/javascript" src="<?= base_url("res/js/jquery-3.2.0.min.js") ?>"></script> 
-<script src="https://npmcdn.com/bootstrap@4.0.0-alpha.5/dist/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="<?= base_url("res/bootstrap/js/bootstrap.min.js") ?>"></script>
-<script>
-    $(document).ready(function () {
-        init();
+    </body>
+    <script type="text/javascript" src="<?= base_url("res/js/jquery-3.2.0.min.js") ?>"></script> 
+    <script src="https://npmcdn.com/bootstrap@4.0.0-alpha.5/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?= base_url("res/bootstrap/js/bootstrap.min.js") ?>"></script>
+    <script>
+        $(document).ready(function () {
+            init();
 
-    });
+        });
 
 
-    function init() {
-        $(".overlay-loader").hide();
-    }
-</script>
+        function init() {
+            $(".overlay-loader").hide();
+        }
+    </script>
 
 </html>

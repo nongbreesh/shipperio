@@ -6,6 +6,10 @@ ul.profile{
     padding: 0px;
     list-style: none;
 }
+
+.modal {
+    background: rgba(0,0,0,0.8) !important;
+}
 ul.profile li {
     margin: 0px;
     border-bottom: 1px #f3f3f3 solid;
@@ -15,9 +19,23 @@ ul.profile li  a{
     display: block;
     font-size: 16px;
 }
-ul.profile li  a.active{
-    color: #000;
+.greenlight {
+    color: #74c418; 
 }
+ul.profile li  a.active{
+    color: rgba(0,0,0,.8);
+}
+.btn-primary {
+    color: #fff;
+    background-color: #1a53f0;
+}
+.btn-primary:hover, .btn-primary.hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    color: #fff;
+    background-color: #1143cc;
+    border-color: #1143cc;
+}
+
+
 body.nopadding {
     padding-top: 0px;
     min-height: 0px;
@@ -26,7 +44,7 @@ body.nopadding {
     color: #1A53F0;
 }
 .text-black{
-    color: #000;
+    color: rgba(0,0,0,.8);
 }
 body.nopadding.grey {
     background: #f7f7f7;
@@ -65,7 +83,7 @@ body.nopadding.grey {
 span.price{
     text-align: right;
     font-size: 18px;
-    color: #000 !important;
+    color: rgba(0,0,0,.8) !important;
 }
 i.sheld{ 
     width: 15px;
@@ -107,7 +125,7 @@ i.sheld{
 .card-campaign .title{
     font-size: 16px;
     height: 60px;
-    color: #000;
+    color: rgba(0,0,0,.8);
     padding-bottom: 5px;
 }
 .card-campaign .block{
@@ -186,7 +204,7 @@ form.checkout{
     margin: 0;
     outline: 0;
     line-height: 1;
-    height: 58px;
+    height: 45px;
     padding: 0 15px;
     margin-bottom: 10px;
 }
@@ -206,7 +224,7 @@ form.checkout{
     color: #8F8F8F;
 }
 .input-text.qty{
-    width: 3.631em;
+    width: 5.631em;
     text-align: center;
     margin: 0;
     vertical-align: middle;
@@ -533,7 +551,7 @@ table.package  thead tr th{
 .overlay-loader .bg {
     width: 100%;
     height: 100%;
-    background: #000;
+    background: rgba(0,0,0,.8);
 
     opacity: .5;
 }
@@ -567,7 +585,7 @@ table.package  thead tr th{
 }
 
 .itemprice {
-    color: #000;
+    color: rgba(0,0,0,.8);
     font-size: 12px;
     font-weight: 700;
     text-shadow: none;
@@ -647,7 +665,7 @@ a.logo {
 }
 
 .navbar-nav > li > a.active{
-    color: #000;
+    color: rgba(0,0,0,.8);
 }
 .navbar-nav.main > li > a {
     padding: 12px 21px;

@@ -115,19 +115,19 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 m-t-10 text-center">
                             <div class="social">
-                                <a href="javascript:void(0)" class="btn  btn-facebook btn-block   btn-lg" data-toggle="tooltip"  title="Login with Facebook"> 
+                                <a href="<?php echo $this->facebook->login_url(); ?>" class="btn  btn-facebook btn-block   btn-lg" data-toggle="tooltip"  title="Login with Facebook"> 
                                     <i aria-hidden="true" class="fa fa-facebook"></i> Continue with Facebook
                                 </a> </div>
                         </div>
                     </div>
-                    <div class="form-group m-b-0">
+<!--                    <div class="form-group m-b-0">
                         <div class="col-sm-12 text-center">
                             <p class="text-center">ยังไม่มีบัญชี? <a class="text-primary m-l-5"
                                                                      href="<?= base_url("register") ?>"
                                                                      style="font-weight: bold;"> คลิกที่นี่ </a>
                                 เพื่อไปหน้าสมัครสมาชิก</p>
                         </div>
-                    </div>
+                    </div>-->
                 </form>
                 <form class="form-horizontal" id="recoverform" action="index.html">
                     <div class="form-group ">

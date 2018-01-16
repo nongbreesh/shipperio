@@ -50,13 +50,15 @@
                     <div class="devider" ></div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12"  > 
+                    <div class="col-xs-12 text-center"  > 
+                        <img width="450" style="max-width: 100%;" src="<?= base_url("res/img/shipperio2.png") ?>"  >
+                        <br/> <br/>
                         <p style="color:green;text-align: center;">ยินดีด้วย! คำสั่งซื้อของคุณได้ส่งถึงนักช๊อปแล้ว <br/></p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12"  style="margin-top: 25px;">
-                        <a  href="<?= base_url(); ?>" onclick="chargecredit()"  class="btn btn-campaign cart">ดูคำสั่งซื้อของคุณ</a>
+                        <a  href="<?= base_url("order"); ?>" onclick="chargecredit()"  class="btn btn-campaign cart">ดูคำสั่งซื้อของคุณ</a>
                     </div>
                 </div>
 

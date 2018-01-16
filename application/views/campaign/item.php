@@ -60,16 +60,16 @@
                     <div style="max-width: 960px; margin:  auto;">
                         <div class="col-xs-12 col-md-7" id="campaign-sidebar">
                             <div class="card-campaign">
-                                <img src="https://www.dhresource.com/0x0s/f2-albu-g2-M01-A1-E5-rBVaG1ZJdrGAVObbAAD3P8iQUto609.jpg/hot-new-the-peanuts-movie-8-snoopy-plush.jpg" />
+                                <img src="<?= $itemdetail->image ?>" />
                                 <div class="row block">
 
                                     <div class=""> 
                                         <div class="devider"></div>
                                         <div class="col-xs-12"> 
-                                            <h4 class="customtitle" style="font-size: 24px;font-weight: 100">ตุ๊กตาสนูปปี้ของแท้</h4>
+                                            <h4 class="customtitle" style="font-size: 24px;font-weight: 100"><?= $itemdetail->title ?></h4>
                                             <div class="description">
-                                                <p>Memory foam padding and soft lambskin covers let you listen comfortably for hours, Bluetooth 4.2 interface enables simple wireless pairing, rechargeable battery offers up to 21 hours of use on a single charge, built-in microphone enables simple hands-free chatting, dynamic transducer design offers reference-grade audio.</p></div>
-
+                                                <p><?= $itemdetail->description ?></p>
+                                            </div>
                                         </div>
                                     </div> 
 
@@ -80,77 +80,30 @@
                             <div class="header">สินค้าอื่นๆของแคมเปญนี้</div>
 
                             <div class="row">
-                                <div class="col-xs-12 col-md-4 col-lg-4">
-                                    <div class="card-campaign">
-                                        <img src="https://www.dhresource.com/0x0s/f2-albu-g2-M01-A1-E5-rBVaG1ZJdrGAVObbAAD3P8iQUto609.jpg/hot-new-the-peanuts-movie-8-snoopy-plush.jpg" />
-                                        <div class="row block">
-                                            <div class="">
+                                <?php foreach ($relate as $row): ?>
+                                    <div class="col-xs-12 col-md-4 col-lg-4">
+                                        <div class="card-campaign">
+                                            <img src="<?= $row->image ?>" />
+                                            <div class="row block">
+                                                <div class="">
 
-                                                <div class="col-xs-12"> 
-                                                    <div class="title relatetitle">ตุ๊กตาสนูปปี้ของแท้</div>
-                                                    <div class="row">
-                                                        <div class="col-xs-12"><div class="counter">1:11:00</div></div>
-                                                        <div class="col-xs-12"><div class="description"><span class="price">600 THB</span></div></div>
+                                                    <div class="col-xs-12"> 
+                                                        <div class="title relatetitle"><?= $row->title ?></div>
+                                                        <div class="row">
+                                                            <div class="col-xs-12"><div class="counter" enddate="<?= $row->end ?>">0day:00:00</div></div>
+                                                            <div class="col-xs-12"><div class="description"><span class="price"><?= $row->price ?> THB</span></div></div>
+                                                        </div>
+
+                                                        <a href="<?= base_url("item/$row->id") ?>"  class="btn btn-campaign btn-outline">สั่งเลย</a>
                                                     </div>
+                                                </div> 
 
-                                                    <button  class="btn btn-campaign btn-outline">สั่งเลย</button>
-                                                </div>
-                                            </div> 
-
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="col-xs-12 col-md-4 col-lg-4">
-                                    <div class="card-campaign">
-                                        <img src="https://www.xn--42c2ba1ay4al3d7gwa0j.com/wp-content/uploads/2017/11/%E0%B9%80%E0%B8%84%E0%B8%AA-iPhone-X-Adidas-Moulded-Case-%E0%B9%84%E0%B8%AD%E0%B9%82%E0%B8%9F%E0%B8%99-X-iPhone-X-Adidas-001.jpg" />
-                                        <div class="row block">
-                                            <div class="">
-
-                                                <div class="col-xs-12"> 
-                                                    <div class="title relatetitle">เคส iPhoneX Adidas ของแท้ลดราคา</div>
-                                                    <div class="row">
-                                                        <div class="col-xs-12"><div class="counter">47:39:00</div></div>
-                                                        <div class="col-xs-12"><div class="description"><span class="price">1,200 THB</span></div></div>
-                                                    </div>
-
-                                                    <button  class="btn btn-campaign btn-outline">สั่งเลย</button>
-                                                </div>
-                                            </div> 
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-xs-12 col-md-4 col-lg-4">
-                                    <div class="card-campaign">
-                                        <img src="https://media.journeys.com/images/products/1_434740_ZM.JPG" />
-                                        <div class="row block">
-                                            <div class="">
-
-                                                <div class="col-xs-12"> 
-                                                    <div class="title  relatetitle"><i class="sheld"></i>&nbsp;รองเท้า New Balance รุ่น Limited ของญี่ปุ่น</div>
-                                                    <div class="row">
-                                                        <div class="col-xs-12"><div class="counter">67:20:18</div></div>
-                                                        <div class="col-xs-12"><div class="description"><span class="price">2,600 THB</span></div></div>
-                                                    </div>
-
-                                                    <button  class="btn btn-campaign btn-outline">สั่งเลย</button>
-                                                </div>
-                                            </div> 
-
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
+                                <?php endforeach; ?> 
                             </div>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <button  class="btn btn-campaign more">ดูสินค้าทั้งหมด</button>
-                                </div>
-                            </div>
+
                         </div>
                         <div class="col-xs-12 col-md-5" id="campaign-sidebar">
                             <div class="card-campaign">
@@ -158,11 +111,11 @@
                                     <div  style="padding: 25px;">
                                         <div class="row">
                                             <div class="col-xs-7"><div class="counter" id="itemcountdown">67:20:18</div></div>
-                                            <div class="col-xs-5"><div class="description" style="text-align: right;"><span class="price">2,600 THB</span></div></div>
+                                            <div class="col-xs-5"><div class="description" style="text-align: right;"><span class="price"><?= number_format($itemdetail->price) ?> THB</span></div></div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-xs-7"><span style="color: #000;font-size: 16px;">ค่าหิ้ว + ค่าส่ง</span></div>
-                                            <div class="col-xs-5"><div class="description"  style="text-align: right;"><span class="price">300 THB</span></div></div>
+                                            <div class="col-xs-7"><span style="color: #000;font-size: 16px;">ค่าบริการ</span></div>
+                                            <div class="col-xs-5"><div class="description"  style="text-align: right;"><span class="price"><?= number_format($itemdetail->fee) ?> THB</span></div></div>
                                         </div>
                                         <div class="row">
                                             <div class="col-xs-6"><span style="color: #000;font-size: 16px;">จำนวน</span></div>
@@ -172,7 +125,7 @@
                                         <div class="row" style="margin-top: 25px;">
                                             <div class="col-xs-12">
                                                 <div class="devider"></div>
-                                                <button  class="btn btn-campaign btn-outline">เพิ่มลงรถเข็น</button>
+                                                <button  class="btn btn-campaign btn-outline" onclick="addcart('<?= $itemdetail->id ?>');">เพิ่มลงรถเข็น</button>
                                             </div>
                                         </div>
                                     </div>
@@ -187,11 +140,17 @@
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <div style="padding: 15px;width: 80px; float: left;display: inline-block;">
-                                                    <img class="img-circle"  src="https://scontent.fbkk6-2.fna.fbcdn.net/v/t1.0-1/p160x160/24993289_1805994722757856_4432412838647803625_n.jpg?oh=f8a49d351bacd0d63bef20fc2d07e490&oe=5AB1A9F1" />
+                                                    <img class="img-circle"  src="http://graph.facebook.com/<?= $itemdetail->fbid ?>/picture?type=square" />
                                                 </div>
                                                 <div style="padding-top: 20px;float: left;display: inline-block;">
-                                                    <h5>Pei jang kyo</h5>
-                                                    <font style="color:green;"><i class="fa fa-circle" aria-hidden="true"></i>&nbsp; กำลังรับออเดอร์</font>
+                                                    <h5><?= $itemdetail->firstname ?>&nbsp;<?= $itemdetail->lastname ?></h5>
+                                                    <?php if ($itemdetail->status == 0): ?>
+                                                        <font ><i class="fa fa-circle" aria-hidden="true" style="color:orange;"></i>&nbsp; รออัพเดท</font>
+                                                    <?php endif; ?>
+                                                    <?php if ($row->status == 1): ?>
+                                                        <font><i class="fa fa-circle greenlight" aria-hidden="true"></i>&nbsp; กำลังรับออเดอร์</font>
+                                                    <?php endif; ?>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -200,13 +159,18 @@
                                                 <div class="devider"></div>
                                                 <div class="col-xs-12">
                                                     <div class="shipping-badge">
-                                                        <span>สถานที่หิ้ว </span>ซัปโปโร,ญี่ปุ่น
+                                                        <span>สถานที่หิ้ว </span><?= $itemdetail->shipfrom ?>
                                                         <br/>
-                                                        <span>สถานที่ส่ง </span>ประเทศไทย 
+                                                        <span>สถานที่ส่ง </span><?= $itemdetail->shipto ?>
+                                                        <br/>
+                                                        <span><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp; วันที่เดินทางไป </span> <?= date("j F, Y", strtotime($itemdetail->campaignstart)); ?>
+                                                        <br/>
+                                                        <span><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp; วันที่เดินทางกลับ </span>  <?= date("j F, Y", strtotime($itemdetail->campaignend)); ?>
+
                                                     </div>
-                                                    <div class="title"><i class="sheld"></i>&nbsp; รับหิ้วของจากซัปโปโร</div>
-                                                    <div class="description">รับหิ้วของจากซํปโปโร หลักๆจะเป็นพวกตุ๊กตาสนูปปี้ของแท้ กดติดตามรอช๊อปกันได้เลยจ้า</div>
-                                                    <button  class="btn btn-campaign btn-outline">ดูสินค้าทั้งหมด</button>
+                                                    <div class="title"><i class="sheld"></i>&nbsp; <?= $itemdetail->campaigntitle ?></div>
+                                                    <div class="description"><?= $itemdetail->campaigndesc ?></div>
+
                                                 </div>
                                             </div> 
 
@@ -219,7 +183,7 @@
                             <div class="header">ที่ตั้งสินค้า</div>
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2915.259453053688!2d141.34873111580313!3d43.05701047914624!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5f0b298314dc68c9%3A0x3e09837aece117a1!2sTanukikoji+Shopping+Arcade!5e0!3m2!1sth!2sth!4v1515835011456" width="100%" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
+                                    <div id="map" style="width: 100%; height: 350px;"></div>
                                 </div>
                             </div>
 
@@ -241,19 +205,62 @@
 
     <?php $this->load->view('template/footer'); ?>
 
+    <!-- Modal -->
+    <div class="modal fade" id="modalAdded" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title customtitle" id="myModalLabel">ข้อความจากระบบ</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+                        <font class="customtitle" style="color: #4CAF50;">คุณได้เพิ่มสินค้าลงตะกร้าแล้ว!</font>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                    <a href="<?= base_url("cart") ?>" type="button" class="btn btn-primary">ไปที่ตะกร้า</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 <script type="text/javascript" src="<?= base_url("res/js/jquery-3.2.0.min.js") ?>"></script> 
 <script src="https://npmcdn.com/bootstrap@4.0.0-alpha.5/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<?= base_url("res/bootstrap/js/bootstrap.min.js") ?>"></script>
+<script src="<?= base_url("res/bootstrap/js/modal.js") ?>" type="text/javascript"></script>
 <script type="text/javascript" src="<?= base_url("res/js/jquery.countdown.min.js") ?>"></script>
 <script src="<?= base_url("res/plugins/Simple-Number-Spinner-Input-Plugin-For-jQuery-DP-Number-Picker/src/minified/jquery.dpNumberPicker-1.0.1-min.js") ?>"></script>
-
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxTz2SIiSSctclQuWdqpY52fmuI8sgI1Q&callback=initMap">
+</script>
 <script>
     $(document).ready(function () {
         init();
+        initMap();
+        $("div[class=counter]").each(function (index, obj) {
+            var enddate = $(obj).attr("enddate");
+            $(obj).countdown(enddate, function (event) {
+                $(this).text(
+                        event.strftime('%D days %H:%M:%S')
+                        );
+            });
 
+        });
     });
-
+    function initMap() {
+        var uluru = {lat: <?= $itemdetail->lat ?>, lng: <?= $itemdetail->lng ?>};
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 17,
+            center: uluru
+        });
+        var marker = new google.maps.Marker({
+            position: uluru,
+            map: map
+        });
+    }
 
     function init() {
         $(".overlay-loader").hide();
@@ -264,11 +271,40 @@
             step: 1
         });
 
-        $("#itemcountdown").countdown("2018/02/05 17:00:00", function (event) {
+        $("#itemcountdown").countdown("<?= $itemdetail->end ?>", function (event) {
             $(this).text(
                     event.strftime('%D days %H:%M:%S')
                     );
         });
+    }
+
+    function addcart(id) {
+
+        var amount = $('.dp-numberPicker-input').val();
+        console.log(amount);
+        if (amount > 0) {
+            $(".overlay-loader").show();
+
+            $.ajax({
+                type: "POST",
+                url: "<?php echo base_url('service/addcart'); ?>",
+                data: {'itemid': id, 'amount': amount},
+                dataType: "json",
+                success: function (data) {
+                    $("#modalAdded").modal("show");
+                    $("#cartnum").html(data.cartnum);
+                    $(".overlay-loader").hide();
+
+                },
+                error: function (XMLHttpRequest) {
+
+                }
+            });
+
+        } else {
+            alert("จำนวนสินค้าต้องมากว่า 0");
+        }
+
     }
 </script>
 

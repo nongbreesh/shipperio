@@ -1,10 +1,91 @@
 <?php
 
-class Select_model extends CI_Model
-{
+class Select_model extends CI_Model {
 
-    function customerdetail($cond)
-    {
+    function userdetail($id) {
+        $query = $this->db->query("select * from `user`  where id = '$id'");
+        return $query->row();
+    }
+
+    function address($userid) {
+        $query = $this->db->query("select * from `address`  where userid = '$userid'");
+        return $query->row();
+    }
+
+    function userfromemail($email) {
+        $query = $this->db->query("select * from `user`  where email = '$email'");
+        return $query->num_rows();
+    }
+
+    function orderlist($custid, $status) {
+        $query = $this->db->query("select * from `order`  where status = '$status' and custid = '$custid' order by createdate desc");
+        return $query->result();
+    }
+
+    function items() {
+        $query = $this->db->query("select a.* from items a
+inner join campaign b
+on a.campaignid = b.id
+where a.status = 1
+and a.start <= curdate()
+and a.end >= curdate()");
+        return $query->result();
+    }
+
+    function itemrelate($campaignid, $itemid) {
+        $query = $this->db->query("select a.* from items a
+inner join campaign b
+on a.campaignid = b.id
+where a.status = 1
+and b.id = '$campaignid'
+    and a.id != '$itemid'
+and a.start <= curdate()
+and a.end >= curdate()");
+        return $query->result();
+    }
+
+    function campaign() {
+        $query = $this->db->query("select  b.*,a.* from   campaign b  inner join user  a
+            on b.userid = a.id 
+where b.status != -1
+and b.campaignstart <= curdate()
+and b.campaignend >= curdate()");
+        return $query->result();
+    }
+
+    function itemdetail($id) {
+        $query = $this->db->query("select a.*,b.title as campaigntitle
+            ,b.description  as campaigndesc
+            ,b.shipfrom 
+            ,b.shipto 
+            ,c.fbid
+            ,c.firstname 
+            ,c.lastname 
+            ,b.campaignstart
+            ,b.campaignend
+            ,b.userid
+             from items a
+inner join campaign b
+on a.campaignid = b.id
+inner join user c
+on b.userid = c.id
+where a.status = 1
+and a.id = '$id'
+and a.start <= curdate()
+and a.end >= curdate()");
+        return $query->row();
+    }
+
+    function orderdetail($id) {
+        $query = $this->db->query("SELECT * 
+FROM  orderdetail a
+inner join items  b
+on a.itemid = b.id
+where a.orderid = '$id'");
+        return $query->result();
+    }
+
+    function customerdetail($cond) {
         $this->db->select('*');
         $this->db->from('customer');
         $this->db->where($cond);
@@ -12,8 +93,7 @@ class Select_model extends CI_Model
         return $query->row();
     }
 
-    function billnotificationusers($cond)
-    {
+    function billnotificationusers($cond) {
         $this->db->select('*');
         $this->db->from('billnotificationusers');
         $this->db->where($cond);
@@ -21,8 +101,7 @@ class Select_model extends CI_Model
         return $query;
     }
 
-    function shippingrate($merchatid, $unit)
-    {
+    function shippingrate($merchatid, $unit) {
         $this->db->select('*');
         $this->db->from('shippingrate');
         $this->db->where('merchantid', $merchatid);
@@ -33,8 +112,7 @@ class Select_model extends CI_Model
         return $query;
     }
 
-    function shippingrateconfig($cond)
-    {
+    function shippingrateconfig($cond) {
         $this->db->select('*');
         $this->db->from('shippingrate');
         $this->db->order_by("unit", "asc");
@@ -43,8 +121,7 @@ class Select_model extends CI_Model
         return $query;
     }
 
-    function lineuid($cond)
-    {
+    function lineuid($cond) {
         $this->db->select('lineuid');
         $this->db->from('merchantlineuid');
         $this->db->where($cond);
@@ -52,8 +129,7 @@ class Select_model extends CI_Model
         return $query;
     }
 
-    function billtoken($cond, $limit = "")
-    {
+    function billtoken($cond, $limit = "") {
         if ($limit != "") {
             $this->db->limit($limit);
         }
@@ -65,8 +141,7 @@ class Select_model extends CI_Model
         return $query;
     }
 
-    function v_merchantlineuid($cond)
-    {
+    function v_merchantlineuid($cond) {
         $this->db->select('lineuid');
         $this->db->from('v_merchantlineuid');
         $this->db->where($cond);
@@ -74,8 +149,7 @@ class Select_model extends CI_Model
         return $query;
     }
 
-    function v_adminsummary($cond)
-    {
+    function v_adminsummary($cond) {
         $this->db->select('*');
         $this->db->from('v_adminsummary');
         $this->db->where($cond);
@@ -83,8 +157,7 @@ class Select_model extends CI_Model
         return $query;
     }
 
-    function v_notificationtousers($cond)
-    {
+    function v_notificationtousers($cond) {
         $this->db->select('*');
         $this->db->from('v_notificationtousers');
         $this->db->where($cond);
@@ -92,8 +165,7 @@ class Select_model extends CI_Model
         return $query;
     }
 
-    function v_order($cond, $notin = null, $in = null)
-    {
+    function v_order($cond, $notin = null, $in = null) {
         if ($notin != null) {
             $this->db->where_not_in('status', $notin);
         }
@@ -107,8 +179,7 @@ class Select_model extends CI_Model
         return $query;
     }
 
-    function orderexcel($cond, $notin = null, $in = null)
-    {
+    function orderexcel($cond, $notin = null, $in = null) {
         if ($notin != null) {
             $this->db->where_not_in('status', $notin);
         }
@@ -121,8 +192,8 @@ class Select_model extends CI_Model
         $query = $this->db->get();
         return $query;
     }
-    function category($cond)
-    {
+
+    function category($cond) {
         $this->db->select('*');
         $this->db->from('category');
         $this->db->where($cond);
@@ -130,19 +201,16 @@ class Select_model extends CI_Model
         return $query;
     }
 
-    function v_cate($cond)
-    {
+    function v_cate($cond) {
         $this->db->select('*');
         $this->db->from('v_cate');
         $this->db->where($cond);
-        $this->db->order_by('id','desc');
+        $this->db->order_by('id', 'desc');
         $query = $this->db->get();
         return $query;
     }
 
-
-    function paymentmethod($cond)
-    {
+    function paymentmethod($cond) {
         $this->db->select('*');
         $this->db->from('paymentmethod');
         $this->db->where($cond);
@@ -150,8 +218,7 @@ class Select_model extends CI_Model
         return $query;
     }
 
-    function bank($cond)
-    {
+    function bank($cond) {
         $this->db->select('*');
         $this->db->from('bank');
         $this->db->where($cond);
@@ -159,8 +226,7 @@ class Select_model extends CI_Model
         return $query;
     }
 
-    function province($cond)
-    {
+    function province($cond) {
         $this->db->select('*');
         $this->db->from('province');
         $this->db->order_by('PROVINCE_NAME', 'asc');
@@ -169,8 +235,7 @@ class Select_model extends CI_Model
         return $query;
     }
 
-    function amphur($cond)
-    {
+    function amphur($cond) {
         $this->db->select('*');
         $this->db->from('amphur');
         $this->db->where($cond);
@@ -178,8 +243,7 @@ class Select_model extends CI_Model
         return $query;
     }
 
-    function district($cond)
-    {
+    function district($cond) {
         $this->db->select('*');
         $this->db->from('district');
         $this->db->where($cond);
@@ -187,8 +251,7 @@ class Select_model extends CI_Model
         return $query;
     }
 
-    function customer($cond)
-    {
+    function customer($cond) {
         $this->db->select('*');
         $this->db->from('customer');
         $this->db->where($cond);
@@ -196,8 +259,7 @@ class Select_model extends CI_Model
         return $query;
     }
 
-    function v_itemswithstock($cond, $billtokenid)
-    {
+    function v_itemswithstock($cond, $billtokenid) {
         $this->db->select('*');
         $this->db->from('v_itemswithstock');
         $this->db->where($cond);
@@ -205,9 +267,7 @@ class Select_model extends CI_Model
         return $query;
     }
 
-
-    function googleanalytic($cond)
-    {
+    function googleanalytic($cond) {
         $this->db->select('*');
         $this->db->from('googleanalytic');
         $this->db->where($cond);
@@ -215,9 +275,7 @@ class Select_model extends CI_Model
         return $query;
     }
 
-
-    function article($cond)
-    {
+    function article($cond) {
         $this->db->select('*');
         $this->db->from('article');
         $this->db->where($cond);
@@ -226,8 +284,7 @@ class Select_model extends CI_Model
         return $query;
     }
 
-    function imagescover($cond)
-    {
+    function imagescover($cond) {
         $this->db->select('*');
         $this->db->from('imagescover');
         $this->db->where($cond);
@@ -235,8 +292,7 @@ class Select_model extends CI_Model
         return $query;
     }
 
-    function itemswithstock($cond, $billtokenid)
-    {
+    function itemswithstock($cond, $billtokenid) {
         $this->db->select('a.*,sum(b.amount) as itemstock');
         $this->db->from('items a');
         $this->db->join("billtokenstock b", " a.id = b.itemid and  b.billtokenid = $billtokenid", "left");
@@ -246,17 +302,7 @@ class Select_model extends CI_Model
         return $query;
     }
 
-    function items($cond)
-    {
-        $this->db->select('*');
-        $this->db->from('items');
-        $this->db->where($cond);
-        $query = $this->db->get();
-        return $query;
-    }
-
-    function user($cond)
-    {
+    function user($cond) {
         $this->db->select('*');
         $this->db->from('user');
         $this->db->where($cond);
@@ -264,8 +310,7 @@ class Select_model extends CI_Model
         return $query;
     }
 
-    function v_serchorderbytelandmerchantuid($tel, $lineuid)
-    {
+    function v_serchorderbytelandmerchantuid($tel, $lineuid) {
         $this->db->select('*');
         $this->db->where('tel', $tel);
         $this->db->where('lineuid', $lineuid);
@@ -277,15 +322,12 @@ class Select_model extends CI_Model
         return $query;
     }
 
-    function v_salehistory($lineuid, $merchantid, $limit = 0, $offset = 10)
-    {
+    function v_salehistory($lineuid, $merchantid, $limit = 0, $offset = 10) {
         $query = $this->db->query("select sum(`a`.`total`) AS `total`,cast(`a`.`submitdate` as date) AS `date`,`b`.`uid` AS `uid`,(select group_concat(concat(`a`.`id`) separator ', ')) AS `orderitems`,`b`.`merchantid` AS `merchantid` from (`order` `a` join `ordertoken` `b` on((`a`.`id` = `b`.`orderid`))) where ((`a`.`status` in (2,3)) and (`a`.`closestatus` = 0) and (b.uid = '$lineuid') and (`b`.`merchantid` = $merchantid)) group by cast(`a`.`submitdate` as date)  order by a.submitdate desc limit $limit , $offset");
         return $query;
     }
 
-
-    function merchantin($tokens)
-    {
+    function merchantin($tokens) {
         $this->db->select('*');
         $this->db->where_in('token', $tokens);
         $this->db->from('merchant');
@@ -293,8 +335,7 @@ class Select_model extends CI_Model
         return $query;
     }
 
-    function v_merchantuid($cond)
-    {
+    function v_merchantuid($cond) {
         $this->db->select('*');
         $this->db->from('v_merchantuid');
         $this->db->where($cond);
@@ -302,8 +343,7 @@ class Select_model extends CI_Model
         return $query;
     }
 
-    function merchantlineuid($cond)
-    {
+    function merchantlineuid($cond) {
         $this->db->select('*');
         $this->db->from('merchantlineuid');
         $this->db->where($cond);
@@ -311,8 +351,7 @@ class Select_model extends CI_Model
         return $query;
     }
 
-    function ordertoken($cond)
-    {
+    function ordertoken($cond) {
         $this->db->select('*');
         $this->db->from('ordertoken');
         $this->db->where($cond);
@@ -320,8 +359,7 @@ class Select_model extends CI_Model
         return $query;
     }
 
-    function order($cond)
-    {
+    function order($cond) {
         $this->db->select('*');
         $this->db->from('order');
         $this->db->where($cond);
@@ -329,8 +367,7 @@ class Select_model extends CI_Model
         return $query;
     }
 
-    function orderids($uid)
-    {
+    function orderids($uid) {
         $this->db->select('orderid');
         $this->db->from('ordertoken');
         $this->db->where_in("uid", $uid);
@@ -338,8 +375,7 @@ class Select_model extends CI_Model
         return $query;
     }
 
-    function orderin_statusopen($orderids)
-    {
+    function orderin_statusopen($orderids) {
         $this->db->select('*');
         $this->db->from('order');
         $this->db->where("status", 1);
@@ -348,17 +384,7 @@ class Select_model extends CI_Model
         return $query;
     }
 
-    function orderdetail($cond)
-    {
-        $this->db->select('*');
-        $this->db->from('orderdetail');
-        $this->db->where($cond);
-        $query = $this->db->get();
-        return $query;
-    }
-
-    function getcustomerlist($merchantid)
-    {
+    function getcustomerlist($merchantid) {
         $query = $this->db->query("SELECT tb .*,(SELECT tk . token from customer c
 inner join `order` o  
 on c . id = o . custid
@@ -370,8 +396,7 @@ where tb . merchantid = $merchantid");
         return $query->result();
     }
 
-    function getorderitems($orderid)
-    {
+    function getorderitems($orderid) {
         $query = $this->db->query("select  
 ii.name,
 sum(oo.amount) as sum
@@ -385,9 +410,7 @@ where orderid  in ($orderid)
         return $query->result();
     }
 
-
-    function getordersumbybilltoken($billtoken)
-    {
+    function getordersumbybilltoken($billtoken) {
         $query = $this->db->query("select   unix_timestamp(b . createdate) as row1,COUNT(a . id) as row2,SUM(b . total) as row3
 from ordertoken a
 join `order` b
@@ -401,8 +424,7 @@ limit 0,30");
         return $query;
     }
 
-    function getdashboarddata($merchantid)
-    {
+    function getdashboarddata($merchantid) {
         $query = $this->db->query("SELECT
     (select count(id)  from  `order` where merchantid = $merchantid and closestatus = 0) as bills
 , (select count(id)  from  `order` where status in(2, 3) and merchantid = $merchantid and closestatus = 0) as paid

@@ -2,7 +2,14 @@
 
 class Insert_model extends CI_Model
 {
-
+    function address($input)
+    {
+        if ($this->db->insert('address', $input)):
+            return true;
+        else:
+            return false;
+        endif;
+    }
     function user($input)
     {
         if ($this->db->insert('user', $input)):

@@ -2,11 +2,9 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Register extends CI_Controller
-{
+class Register extends CI_Controller {
 
-    function __construct()
-    {
+    function __construct() {
         parent::__construct();
         $this->load->model('Insert_model', 'put');
         $this->load->model('Select_model', 'get');
@@ -18,16 +16,22 @@ class Register extends CI_Controller
         $this->load->library('lineapi');
     }
 
-    public function index()
-    {
+    public function index() {
         $data["emaildoesexit"] = false;
         $data["webnamedoesexit"] = false;
         $data["register"] = false;
+
+        $data["email"] = $this->input->get('email');
+        $fbid = $this->input->get('id');
+        $data["name"] = explode(' ', $this->input->get('name'));
+        if (!$fbid) {
+            redirect(base_url("login"));
+        }
         if ($_POST) {
-            $email = $this->input->post('email');
-            $lineid = $this->input->post('lineid');
-            $name = $this->input->post('name');
-            $webname = $this->input->post('webname');
+            $email = $data["email"];
+            $password = $this->input->post('password');
+            $firstname = $this->input->post('firstname');
+            $lastname = $this->input->post('lastname');
             $cond = array('email' => $email);
             if ($this->get->user($cond)->num_rows() > 0) {
                 $data["emaildoesexit"] = true;
@@ -36,13 +40,24 @@ class Register extends CI_Controller
                 $token = $this->common->getToken(10);
                 $input = array(
                     'email' => $email,
+                    'firstname' => $firstname,
+                    'lastname' => $lastname,
                     'image' => base_url("public/avatar.png"),
                     'password' => md5($password),
-                    'token' => $token,
+                    'fbid' => $fbid,
                 );
                 $this->put->user($input);
-                $data["register"] = true;
-                redirect(base_url("login?register=success"));
+
+                $remember_me = 'on';
+                $result = $this->user->user_login_fbid($fbid, $remember_me);
+                $user = $this->user->get_account_cookie();
+                if ($result) {
+                    redirect(base_url());
+                } else {
+                    redirect(base_url("register"));
+                }
+                //$data["register"] = true;
+                // redirect(base_url("login?register=success"));
             }
         }
 

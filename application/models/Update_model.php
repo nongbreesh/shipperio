@@ -10,9 +10,27 @@ class Update_model extends CI_Model {
             return false;
         endif;
     }
+    
+    public function address($input) {
+        $this->db->where('id', $input['id']);
+        if ($this->db->update('address', $input)):
+            return true;
+        else:
+            return false;
+        endif;
+    }
+
+    public function user($input) {
+        $this->db->where('id', $input['id']);
+        if ($this->db->update('user', $input)):
+            return true;
+        else:
+            return false;
+        endif;
+    }
 
     public function delete_shippingrate($id) {
-        $this->db->where('id', $id); 
+        $this->db->where('id', $id);
         if ($this->db->delete('shippingrate')):
             return true;
         else:
@@ -37,7 +55,6 @@ class Update_model extends CI_Model {
             return false;
         endif;
     }
-
 
     public function billtoken($input) {
         $this->db->where('id', $input['id']);
@@ -66,8 +83,6 @@ class Update_model extends CI_Model {
         endif;
     }
 
-
-
     public function googleanalytic($input) {
         $this->db->where('id', $input['id']);
         if ($this->db->update('googleanalytic', $input)):
@@ -77,9 +92,6 @@ class Update_model extends CI_Model {
         endif;
     }
 
-
-
-
     public function imagescover($input) {
         $this->db->where('id', $input['id']);
         if ($this->db->update('imagescover', $input)):
@@ -88,8 +100,6 @@ class Update_model extends CI_Model {
             return false;
         endif;
     }
-
-
 
     function shippingrate($input) {
         $this->db->where('id', $input['id']);
@@ -136,8 +146,8 @@ class Update_model extends CI_Model {
             return false;
         endif;
     }
-    
-      function merchantlineuidbyinvitetoken($input) {
+
+    function merchantlineuidbyinvitetoken($input) {
         $this->db->where('invitetoken', $input['invitetoken']);
         if ($this->db->update('merchantlineuid', $input)):
             return true;

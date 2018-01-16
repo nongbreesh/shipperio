@@ -14,20 +14,160 @@ class Service extends CI_Controller {
         $this->load->library('lineapi');
         $this->load->library('excel');
         $this->load->library('common');
+        $this->load->library(array('encrypt'));
+        $this->load->helper(array('cookie', 'url'));
+        //init keys
+        $this->load->library('omise_api');
+        $this->omise_api->init('pkey_test_5a66vu8bkcbk2nqwsq9', 'skey_test_5a66vu8c3o3zy2fhnzd');  // replace with your keys
+    }
+
+    public function omisecapture($id) {
+        $capture = $this->omise_api->capture($id);
+        print_r($capture);
     }
 
     public function chargecredit() {
-        //init keys
-        $this->load->library('omise_api');
-        $this->omise_api->init('pkey_test_55ernhgh768hca1vipv', 'skey_test_55ernhgkqlapibx49k5');  // replace with your keys
+
+        $data["result"] = false;
+        $user = $this->user->get_account_cookie();
+        $billing_name = $this->input->post('billing_name');
+        $billing_tel = $this->input->post('billing_tel');
+        $billing_email = $this->input->post('billing_email');
+        $billing_address1 = $this->input->post('billing_address1');
+        $billing_address2 = $this->input->post('billing_address2');
+
+        $cart = get_cookie('cart', true);
+        $cart = $this->encrypt->decode($cart);
+        $cart = @unserialize($cart);
+
+        $cartdata = array();
+        $summary = 0;
+        $total = 0;
+        foreach ($cart as $row) {
+            $data = (array) $this->get->itemdetail($row["itemid"]);
+            $summary += ($data["price"] + $data["fee"]) * $row["amount"];
+        }
+
+        $total = $summary + ($summary * CHARGE);
+        $_amount = str_replace('.', '', str_replace(',', '', number_format($total, 2)));
+
+
         //$card_token recieved from card.js submit form
 //$amount use int as Satang
 //$capture TRUE is capture immediately and set it false to capture later
+
+        $uniqid = $this->common->getToken(10);
         $card_token = $this->input->post('card_token');
-        $charge = $this->omise_api->create($card_token, $amount = "10050", $description="xxx", $capture = true, $currency = 'thb');
+        $charge = $this->omise_api->create($card_token, $amount = $_amount, $description = "Shipperio-" . $uniqid, $capture = true, $currency = 'thb');
+        if ($charge) {
+            $order = array(
+                "ref" => $uniqid,
+                "custid" => $user["id"],
+                "billingname" => $billing_name,
+                "billingtel" => $billing_tel,
+                "billingemail" => $billing_email,
+                "billingaddress1" => $billing_address1,
+                "billingaddress2" => $billing_address2,
+                "total" => $summary,
+                "status" => 1,
+                "omise_charge_id" => $charge->id,
+                "paymentmethodid" => 1,
+                "createdate" => date('Y-m-d H:i:s'),
+            );
+
+            $orderid = $this->put->order($order);
 
 
-        $data["result"] = $charge;
+            foreach ($cart as $row) {
+                $data = (array) $this->get->itemdetail($row["itemid"]);
+                $input = array(
+                    "ref" => $uniqid,
+                    "orderid" => $orderid,
+                    "amount" => $row["amount"],
+                    "price" => $data["price"],
+                    "fee" => $data["fee"],
+                    "itemid" => $row["itemid"],
+                    "createdate" => date('Y-m-d H:i:s'),
+                );
+
+                $this->put->orderdetail($input);
+            }
+
+
+            $address = $this->get->address($user["id"]);
+            $inputaddr = array('userid' => $user["id"]
+                , 'name' => $billing_name
+                , 'address1' => $billing_address1
+                , 'address2' => $billing_address2
+                , 'updatedate' => date('Y-m-d H:i:s'));
+
+
+            if ($address) {
+                $inputaddr["id"] = $address->id;
+                $this->set->address($inputaddr);
+            } else {
+                $this->put->address($inputaddr);
+            }
+
+            $cart = $this->encrypt->encode(serialize(null));
+            set_cookie('cart', $cart, time() - 3600);
+            $data["result"] = $charge;
+        }
+
+
+
+        $this->output->set_header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($data);
+    }
+
+    public function addcart() {
+        $itemid = $this->input->post('itemid');
+        $amount = $this->input->post('amount');
+
+        $expires = ( 60 * 60 * 24);
+
+        $newcart = array();
+        $cart = get_cookie('cart', true);
+        $cart = $this->encrypt->decode($cart);
+        $cart = @unserialize($cart);
+        $ispush = false;
+        if ($cart != null) {
+            foreach ($cart as $row) {
+                if ($row["itemid"] == $itemid) {
+                    $row["amount"] = $amount;
+                    array_push($newcart, $row);
+                    $ispush = true;
+                } else {
+                    array_push($newcart, $row);
+                }
+            }
+            if (!$ispush) {
+                $item['itemid'] = $itemid;
+                $item['amount'] = $amount;
+                array_push($newcart, $item);
+            }
+        } else {
+            $item['itemid'] = $itemid;
+            $item['amount'] = $amount;
+            array_push($newcart, $item);
+        }
+
+
+        $cartdata = $this->encrypt->encode(serialize($newcart));
+        set_cookie('cart', $cartdata, $expires);
+
+        $data['cartnum'] = count($newcart);
+        $data['result'] = $cart;
+        $this->output->set_header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($data);
+    }
+
+    public function getcartnum() {
+        $cart = get_cookie('cart', true);
+        $cart = $this->encrypt->decode($cart);
+        $cart = @unserialize($cart);
+
+        $data['result'] = $cart ? count($cart) : 0;
         $this->output->set_header('Content-Type: application/json; charset=utf-8');
         echo json_encode($data);
     }
@@ -37,6 +177,16 @@ class Service extends CI_Controller {
         $txtidcard = $this->input->post('txtidcard');
         $cond = array('tel' => $txttel, 'idcard' => $txtidcard);
         $data['result'] = $this->get->customerdetail($cond);
+        $this->output->set_header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($data);
+    }
+
+    public function updatephone() {
+        $user = $this->user->get_account_cookie();
+        $phoneno = $this->input->post('phoneno');
+        $input = array('id' => $user["id"]
+            , 'tel' => $phoneno);
+        $data['result'] = $this->set->user($input);
         $this->output->set_header('Content-Type: application/json; charset=utf-8');
         echo json_encode($data);
     }

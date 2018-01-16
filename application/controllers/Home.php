@@ -14,11 +14,13 @@ class Home extends CI_Controller {
         $this->load->library('upload');
         $this->load->library('common');
         $this->load->library('lineapi');
+        $this->load->library(array('encrypt'));
     }
 
     public function index() {
-        $data["user"] = $this->user->get_account_cookie(); 
-       // print_r($data["user"]);
+        $data["obj"] = $this;
+        $data["user"] = $this->user->get_account_cookie();
+        // print_r($data["user"]);
         $data["token"] = $data["user"] ['token'];
         $data["islogin"] = $this->user->is_login();
         $data["menu"] = "home";
@@ -26,22 +28,88 @@ class Home extends CI_Controller {
     }
 
     public function campaign() {
+        $data["obj"] = $this;
         $data["user"] = $this->user->get_account_cookie();
         $data["token"] = $data["user"] ['token'];
         $data["menu"] = "campaign";
+        $data["item"] = $this->get->items();
+        $data["campaign"] = $this->get->campaign();
         $data["islogin"] = $this->user->is_login();
         $this->load->view('campaign/index', $data);
     }
 
     public function item($id) {
+        $data["obj"] = $this;
         $data["user"] = $this->user->get_account_cookie();
+
         $data["token"] = $data["user"] ['token'];
         $data["menu"] = "";
+        $data["itemdetail"] = $this->get->itemdetail($id);
+        $data["relate"] = $this->get->itemrelate($data["itemdetail"]->campaignid, $data["itemdetail"]->id);
         $data["islogin"] = $this->user->is_login();
         $this->load->view('campaign/item', $data);
     }
 
+    public function removecart($id) {
+
+        $cart = get_cookie('cart', true);
+        $cart = $this->encrypt->decode($cart);
+        $cart = @unserialize($cart);
+
+        foreach ($cart as $index => $row) {
+            if ($row["itemid"] == $id) {
+                unset($cart[$index]);
+            }
+        }
+        $expires = ( 60 * 60 * 24);
+        $cart = $this->encrypt->encode(serialize($cart));
+        set_cookie('cart', $cart, $expires);
+        redirect(base_url("cart"));
+    }
+
     public function cart() {
+
+        $data["obj"] = $this;
+        $amount = $this->input->post('amount');
+        if ($_POST) {
+            $cart = get_cookie('cart', true);
+            $cart = $this->encrypt->decode($cart);
+            $cart = @unserialize($cart);
+            $cartupdate = array();
+            $cartdata = array();
+            foreach ($cart as $index => $row) {
+                $data = (array) $this->get->itemdetail($row["itemid"]);
+                $data["amount"] = $amount[$index];
+                $row["amount"] = $amount[$index];
+
+                array_push($cartupdate, $row);
+                array_push($cartdata, $data);
+            }
+
+            $expires = ( 60 * 60 * 24);
+            $cartupdate = $this->encrypt->encode(serialize($cartupdate));
+            set_cookie('cart', $cartupdate, $expires);
+
+            $data["cartdata"] = $cartdata;
+        } else {
+            $cart = get_cookie('cart', true);
+            $cart = $this->encrypt->decode($cart);
+            $cart = @unserialize($cart);
+
+            $cartdata = array();
+            if ($cart) {
+                foreach ($cart as $row) {
+                    $data = (array) $this->get->itemdetail($row["itemid"]);
+                    $data["amount"] = $row["amount"];
+                    array_push($cartdata, $data);
+                }
+            }
+
+            $data["cartdata"] = $cartdata;
+        }
+
+
+
         $data["user"] = $this->user->get_account_cookie();
         $data["token"] = $data["user"] ['token'];
         $data["menu"] = "";
@@ -50,11 +118,31 @@ class Home extends CI_Controller {
     }
 
     public function checkout() {
-
-
         $data["user"] = $this->user->get_account_cookie();
+        if (!$data["user"]) {
+            redirect(base_url("login"));
+        }
+        $cart = get_cookie('cart', true);
+        $cart = $this->encrypt->decode($cart);
+        $cart = @unserialize($cart);
+
+
+        $cartdata = array();
+        if ($cart) {
+            foreach ($cart as $row) {
+                $data = (array) $this->get->itemdetail($row["itemid"]);
+                $data["amount"] = $row["amount"];
+                array_push($cartdata, $data);
+            }
+        }
+
+
+        $data["cartdata"] = $cartdata;
+        $data["user"] = $this->user->get_account_cookie();
+        $data["userdetail"] = $this->get->userdetail($data["user"]["id"]);
         $data["token"] = $data["user"] ['token'];
         $data["menu"] = "";
+        $data["address"] = $this->get->address($data["user"]["id"]);
         $data["islogin"] = $this->user->is_login();
         $this->load->view('cart/checkout', $data);
     }
