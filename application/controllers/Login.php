@@ -56,11 +56,12 @@ class Login extends CI_Controller {
         if ($this->facebook->is_authenticated()) {
             // User logged in, get user details
             $user = $this->facebook->request('get', '/me?fields=id,name,email');
+            //print_r($user);
             if (!isset($user['error'])) {
                 $data['user'] = $user;
                 $id = $user["id"];
                 $name = $user["name"];
-                $email = $user["email"];
+                $email = isset($user["email"]) ? $user["email"] : '';
 
                 if ($this->get->userfromemail($email) == 0) {
                     redirect(base_url("register?email=$email&name=$name&id=$id"));

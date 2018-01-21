@@ -83,6 +83,7 @@ class Service extends CI_Controller {
                 $input = array(
                     "ref" => $uniqid,
                     "orderid" => $orderid,
+                    "campaignid" => $data["campaignid"],
                     "amount" => $row["amount"],
                     "price" => $data["price"],
                     "fee" => $data["fee"],
@@ -91,7 +92,20 @@ class Service extends CI_Controller {
                 );
 
                 $this->put->orderdetail($input);
+
+// เงินจะเข้าเมื่อกดยืนยันจัดส่ง และไม่มี complain
+//                $campaignuser = $this->get->campaignuser($data["campaignid"]);
+//                $sum = ($data["price"] + $data["fee"]) * $row["amount"];
+//                $inputbalance = array('userid' => $campaignuser->userid
+//                    , 'amount' => $sum
+//                    , "itemid" => $row["itemid"]
+//                    , 'remark' => "DEPOSIT"
+//                    , 'order_ref' => $uniqid
+//                    , 'createdate' => date('Y-m-d H:i:s'));
+//                $this->put->userbalance($inputbalance);
             }
+
+
 
 
             $address = $this->get->address($user["id"]);

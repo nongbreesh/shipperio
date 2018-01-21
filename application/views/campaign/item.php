@@ -3,8 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <title>แพลตฟอร์มรับหิ้วสินค้าทั่วโลก</title>
-        <meta name="description" content="รับหิ้วสินค้า">
+        <title><?= $itemdetail->title ?></title>
+        <meta name="description" content="<?= $itemdetail->title ?>">
         <meta name="keywords" content="เว็บสำเร็จรูป,บิลออนไลน์,ขายของผ่านไลน์,ขายของออนไลน์">
         <link href="https://fonts.googleapis.com/css?family=Prompt" rel="stylesheet">
         <link href="<?= base_url("res/css/font-awesome.min.css") ?>" rel="stylesheet" type="text/css"/>
@@ -81,25 +81,10 @@
 
                             <div class="row">
                                 <?php foreach ($relate as $row): ?>
-                                    <div class="col-xs-12 col-md-4 col-lg-4">
-                                        <div class="card-campaign">
-                                            <img src="<?= $row->image ?>" />
-                                            <div class="row block">
-                                                <div class="">
-
-                                                    <div class="col-xs-12"> 
-                                                        <div class="title relatetitle"><?= $row->title ?></div>
-                                                        <div class="row">
-                                                            <div class="col-xs-12"><div class="counter" enddate="<?= $row->end ?>">0day:00:00</div></div>
-                                                            <div class="col-xs-12"><div class="description"><span class="price"><?= $row->price ?> THB</span></div></div>
-                                                        </div>
-
-                                                        <a href="<?= base_url("item/$row->id") ?>"  class="btn btn-campaign btn-outline">สั่งเลย</a>
-                                                    </div>
-                                                </div> 
-
-                                            </div>
-                                        </div>
+                                <div class="col-xs-12 col-md-4 col-lg-3 " style="padding: 5px;" data-toggle="tooltip" data-placement="top" title="<?=$row->title?>" >
+                                
+                                    <a href="<?= base_url("item/$row->id/$row->title") ?>" title="<?=$row->title?>" alt="<?=$row->title?>"  ><img class="img img-rounded img-responsive" src="<?= $row->image ?>" />  </a>
+                               
                                     </div>
                                 <?php endforeach; ?> 
                             </div>
@@ -215,7 +200,11 @@
                 </div>
                 <div class="modal-body">
                     <div class="text-center">
-                        <font class="customtitle" style="color: #4CAF50;">คุณได้เพิ่มสินค้าลงตะกร้าแล้ว!</font>
+
+                        <img src="<?= base_url("res/img/addcart.png") ?>"  style="width: 250px; margin: 0 auto;"/>
+                        <br/>
+                        <br/>
+                        <font class="customtitle" style="color: #4CAF50;">คุณได้เพิ่ม <?= $itemdetail->title ?>  จำนวน <span id="amount"></span> ชิ้น ลงตะกร้าแล้ว!</font>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -228,11 +217,13 @@
 
 </body>
 <script type="text/javascript" src="<?= base_url("res/js/jquery-3.2.0.min.js") ?>"></script> 
+<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
 <script src="https://npmcdn.com/bootstrap@4.0.0-alpha.5/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<?= base_url("res/bootstrap/js/bootstrap.min.js") ?>"></script>
 <script src="<?= base_url("res/bootstrap/js/modal.js") ?>" type="text/javascript"></script>
 <script type="text/javascript" src="<?= base_url("res/js/jquery.countdown.min.js") ?>"></script>
 <script src="<?= base_url("res/plugins/Simple-Number-Spinner-Input-Plugin-For-jQuery-DP-Number-Picker/src/minified/jquery.dpNumberPicker-1.0.1-min.js") ?>"></script>
+<script src="<?= base_url("res/bootstrap/js/tooltip.js") ?>" type="text/javascript"></script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxTz2SIiSSctclQuWdqpY52fmuI8sgI1Q&callback=initMap">
 </script>
@@ -263,6 +254,7 @@
     }
 
     function init() {
+        $('[data-toggle="tooltip"]').tooltip();
         $(".overlay-loader").hide();
         $("#np").dpNumberPicker({
             value: 0,
@@ -281,7 +273,8 @@
     function addcart(id) {
 
         var amount = $('.dp-numberPicker-input').val();
-        console.log(amount);
+
+        $("#amount").html(amount);
         if (amount > 0) {
             $(".overlay-loader").show();
 

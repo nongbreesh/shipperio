@@ -27,7 +27,7 @@ ul.profile li  a.active{
 }
 .btn-primary {
     color: #fff;
-    background-color: #1a53f0;
+    background-color: #34495e;
 }
 .btn-primary:hover, .btn-primary.hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
     color: #fff;
@@ -41,7 +41,7 @@ body.nopadding {
     min-height: 0px;
 }
 .text-blue{
-    color: #1A53F0;
+    color: #34495e;
 }
 .text-black{
     color: rgba(0,0,0,.8);
@@ -74,6 +74,42 @@ body.nopadding.grey {
     line-height: 12px;
     margin-bottom: 15px;
 }
+.creditbalance{
+        font-size: 32px;
+    background: #fbfbfb;
+    padding: 15px;
+    border-radius: 15px;
+    margin: 25px auto;
+    min-width: 200px;
+    max-width: 300px;
+    color: #8BC34A;
+    box-shadow: -4px 2px #88C34A;
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+#img-upload{
+    margin: 0 auto;
+    padding: 25px;
+    width: 140px;
+}
 .card-box h5 {
     color: #696969;
     font-size: 14px;
@@ -102,17 +138,20 @@ i.sheld{
     padding-left: 5%;
     padding-right: 5%;
     box-shadow: 2px 2px 0 0 rgb(255,236,222);
-    border: 1px solid #1A53F0;
+    border: 1px solid #34495e;
     vertical-align: middle;
     border-radius: 5px;
 }
 
 .counter{
     font-size: 18px;
-    color: red;
+    color: #000;
     font-weight: bold;
+    height: 75px;
 }
 .card-campaign{
+    margin-left: -10px;
+    margin-right: -10px;
     font-size: 14px;
     display: block;
     background:#fff;
@@ -121,7 +160,9 @@ i.sheld{
     padding-bottom: 15px;
     margin-bottom: 15px;
 }
-
+.card-campaign img{
+    border-radius: 5px 5px 0px 0px;
+}
 .card-campaign .title{
     font-size: 16px;
     height: 60px;
@@ -132,27 +173,26 @@ i.sheld{
     padding: 5px 15px;
 }
 .btn-campaign{
-    width: 100%;
-    border: 1px #3F51B5  solid;
-    color: #3F51B5;
-    background: rgba(0,0,0,0);
+    width: 100%; 
+    color: #fff;
+    background: #5d5d5d;
 }
 .btn-campaign.more{
-    background: #1a53f0 ;
-    border: 1px #1a53f0  solid;
+    background: #34495e ;
+    border: 1px #34495e  solid;
     color: #fff;
     margin-bottom: 25px;
 }
 .btn-campaign.cart{
     max-width: 200px !important;
-    background: #1a53f0 ;
-    border: 1px #1a53f0  solid;
+    background: #5d5d5d ;
+    border: 1px #5d5d5d  solid;
     color: #fff;
     margin: 0 auto  !important;
     display: block;
 }
 .btn-campaign:hover{
-    background: #1c4cce;
+    background: #3c3c3c;
     color: #fff;
 }
 .tb-cart tbody tr td,.tb-cart tbody tr th{
@@ -315,7 +355,7 @@ form.checkout{
 
 .feature p {
     padding: 15px;
-    color: #1A53F0;
+    color: #34495e;
     font-size: .8em;
 }
 
@@ -460,16 +500,17 @@ table.package  thead tr th{
     padding: 25px;
 }
 .startnow .startusing,.btn-blue{
-    background: #1A53F0;
+    background: #5d5d5d;
     max-width: 230px;
     padding: 10px;
     margin: 0 auto;
-    border-radius: 35px;
+    border-radius:  5px;
     display: block;
     color: #fff;
 }
-.startnow .startusing:hover{
-    background: #1A53F0;
+.startnow .startusing:hover,.btn-blue:hover{
+    background: #3c3c3c;
+    color: #fff;
 }
 
 
@@ -599,8 +640,8 @@ table.package  thead tr th{
 }
 
 .startusing {
-    background: #1A53F0;
-    border-radius: 35px;
+    background: #FF9800;
+    border-radius: 5px;
 }
 
 .startusing a {
@@ -649,7 +690,7 @@ a.logo {
 .heading-wrapper  h2{
     font-family: 'Prompt', Arial, sans-serif;
     font-size: 2.2em;
-    color:#1A53F0;
+    color:#34495e;
 }
 
 .text-grey {
@@ -659,13 +700,18 @@ a.logo {
 .text-white {
     color: #fff;
 }
-
-.navbar-nav > li > a {
-    color: #1A53F0;
+#eliteregister li.active:before, #eliteregister li.active:after {
+    background: #34495e;
+    color: #fff;
 }
-
+.navbar-nav > li > a {
+    color: #5d5d5d;
+}
+.dp-numberPicker-add, .dp-numberPicker-sub { 
+    background-color: #34495e !important; 
+}
 .navbar-nav > li > a.active{
-    color: rgba(0,0,0,.8);
+    color: #000;
 }
 .navbar-nav.main > li > a {
     padding: 12px 21px;
@@ -748,7 +794,7 @@ a.logo {
         color: #686868; 
     }
     .feature h4 {
-        color: #1A53F0;
+        color: #34495e;
         font-size: .7em;
         line-height: 1.2em;
         padding-bottom: 30px;
@@ -869,7 +915,7 @@ a.logo {
 }
 
 .form-group.focus .form-control, .form-control:focus, .form-group.focus .select2-search input[type="text"], .select2-search input[type="text"]:focus {
-    border-color: #1A53F0;
+    border-color: #34495e;
     outline: 0;
     box-shadow: none;
 }

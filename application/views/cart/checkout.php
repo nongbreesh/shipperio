@@ -122,7 +122,7 @@
                                         </tr> 
                                         <tr> 
                                             <th  colspan="2">
-                                                ค่าธรรมเนียม
+                                                Fee
                                             </th> 
                                             <th>฿<?= number_format($summary * CHARGE, 2) ?></th>  
                                             <?php
@@ -185,7 +185,8 @@
                     </div>
                     <div class="row">
 
-                        <div class="col-xs-12 text-center"  style="margin-top: 25px;">
+                        <div class="col-xs-12 text-center"  style="margin-top: 15px;">
+                            ( Shipperio ไม่มีนโยบายเก็บข้อมูลบัตรของลูกค้า )
                             <div class="checkbox">
                                 <label>
                                     <input style="margin-top: 10px;" type="checkbox" id="chk_agree" class="checkbox-primary"> ฉันได้อ่าน <a href="javascript:;" onclick="showAgree();"><u>เงื่อนไขและข้อกำหนด</u></a> แล้ว

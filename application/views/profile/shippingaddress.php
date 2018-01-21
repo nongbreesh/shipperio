@@ -42,7 +42,7 @@
 
         </header> 
 
-        <div class="container" style="max-width:960px;">
+        <div class="container"  >
             <div class="row"> 
                 <?php $this->load->view("profile/sidebar"); ?>
 
@@ -55,7 +55,7 @@
                             </div>
                         <?php endif; ?>
                         <form method="post" >
-                            <h6 class="customtitle">ที่อยู่จัดส่ง</h6>
+                            <h4 class="customtitle text-black">ที่อยู่จัดส่ง</h4>
                             <div class="row">
                                 <div class="col-xs-12">
                                     <label for="billing_first_name" class="text-danger">ชื่อ <abbr class="required" title="required">*</abbr></label>

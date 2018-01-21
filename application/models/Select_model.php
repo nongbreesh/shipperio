@@ -7,9 +7,91 @@ class Select_model extends CI_Model {
         return $query->row();
     }
 
+    function userbalance($userid) {
+        $query = $this->db->query("SELECT sum(amount)as total FROM `userbalance` where userid = '$userid' group by userid");
+        return $query->row();
+    }
+
+    function campaignuser($id) {
+        $query = $this->db->query("SELECT  * FROM `campaign` where id = '$id'");
+        return $query->row();
+    }
+
+    function alluser() {
+        $query = $this->db->query("SELECT  * FROM `user`");
+        return $query->result();
+    }
+
+    function newuser() {
+        $query = $this->db->query("SELECT  * FROM `user` order by createdate desc limit 0,4");
+        return $query->result();
+    }
+
+    function allcampaign() {
+        $query = $this->db->query("SELECT  * FROM `campaign`");
+        return $query->result();
+    }
+
+    function orderbycampaignuser($userid) {
+        $query = $this->db->query("SELECT o.*,o.id as orderdetailid,i.*,i.*,o.createdate as orderdate FROM `orderdetail` o
+            inner join items i
+            on i.id = o.itemid WHERE o.campaignid in 
+(select id from campaign c where c.userid = '$userid') and o.status = 0
+order by o.createdate desc");
+        return $query->result();
+    }
+
+    function orderbycampaignuser_pendingship($userid) {
+        $query = $this->db->query("SELECT o.*,o.id as orderdetailid,i.*,o.createdate as orderdate,oo.billingaddress1,oo.billingaddress2,oo.billingname,oo.billingtel,oo.billingemail FROM `orderdetail` o
+            inner join items i
+            on i.id = o.itemid 
+             left join `order` oo
+             on oo.id = o.orderid
+            WHERE o.campaignid in 
+(select id from campaign c where c.userid = '$userid') and o.status = 1
+order by o.createdate desc");
+        return $query->result();
+    }
+
+    function orderbycampaignuser_shiped($userid) {
+        $query = $this->db->query("SELECT o.*,o.id as orderdetailid,i.*,i.*,o.createdate as orderdate,oo.billingaddress1,oo.billingaddress2,oo.billingname,oo.billingtel,oo.billingemail FROM `orderdetail` o
+            inner join items i
+            on i.id = o.itemid 
+             left join `order` oo
+             on oo.id = o.orderid
+            WHERE o.campaignid in 
+(select id from campaign c where c.userid = '$userid') and o.status = 2
+order by o.createdate desc");
+        return $query->result();
+    }
+
+    function orderbycampaignuser_cancel($userid) {
+        $query = $this->db->query("SELECT o.*,o.id as orderdetailid,o.updatedate as canceldate,i.*,i.*,o.createdate as orderdate FROM `orderdetail` o
+            inner join items i
+            on i.id = o.itemid WHERE o.campaignid in 
+(select id from campaign c where c.userid = '$userid') and o.status = -1
+order by o.createdate desc");
+        return $query->result();
+    }
+
+    function userwithdraws($userid) {
+        $query = $this->db->query("SELECT * FROM `userbalance` where userid = '$userid'  and remark = 'WITHDRAW' order by createdate desc");
+        return $query->result();
+    }
+
+    function financedetail($id) {
+        $query = $this->db->query("select * from `finance`  where userid = '$id'");
+        return $query->row();
+    }
+
     function address($userid) {
         $query = $this->db->query("select * from `address`  where userid = '$userid'");
         return $query->row();
+    }
+
+    function finace_num($userid) {
+        $query = $this->db->query("select * from `finance`  where userid = '$userid'");
+        return $query->num_rows();
     }
 
     function userfromemail($email) {
@@ -18,17 +100,27 @@ class Select_model extends CI_Model {
     }
 
     function orderlist($custid, $status) {
-        $query = $this->db->query("select * from `order`  where status = '$status' and custid = '$custid' order by createdate desc");
+        $query = $this->db->query("select o.*,$status as orderstatus from `order` o  where (select count(id) from orderdetail where orderid = o.id and status = $status) > 0 and o.custid = '$custid' order by o.createdate desc");
         return $query->result();
     }
 
-    function items() {
+    function items($id = "", $all = false) {
+        $wh = "";
+        $lm = "limit 0,8";
+        if ($id != "") {
+            $wh = " and b.id = '$id'";
+            $lm = "";
+        }
+        if ($all) {
+            $lm = "";
+        }
         $query = $this->db->query("select a.* from items a
 inner join campaign b
 on a.campaignid = b.id
 where a.status = 1
+$wh
 and a.start <= curdate()
-and a.end >= curdate()");
+and a.end >= curdate() order by a.createdate desc $lm");
         return $query->result();
     }
 
@@ -44,12 +136,17 @@ and a.end >= curdate()");
         return $query->result();
     }
 
-    function campaign() {
+    function campaign($id = "") {
+        $wh = "";
+        if ($id != "") {
+            $wh = " and b.id = '$id'";
+        }
         $query = $this->db->query("select  b.*,a.* from   campaign b  inner join user  a
             on b.userid = a.id 
 where b.status != -1
+$wh
 and b.campaignstart <= curdate()
-and b.campaignend >= curdate()");
+and b.campaignend >= curdate() order by b.createdate desc");
         return $query->result();
     }
 
@@ -76,12 +173,20 @@ and a.end >= curdate()");
         return $query->row();
     }
 
-    function orderdetail($id) {
+    function orderdetailbyid($id) {
+        $query = $this->db->query("SELECT a.*,b.custid 
+FROM  orderdetail a
+left join `order` b on a.orderid  = b.id 
+where a.id = '$id'");
+        return $query->row();
+    }
+
+    function orderdetail($id, $status) {
         $query = $this->db->query("SELECT * 
 FROM  orderdetail a
 inner join items  b
 on a.itemid = b.id
-where a.orderid = '$id'");
+where a.orderid = '$id' and a.status  = $status");
         return $query->result();
     }
 

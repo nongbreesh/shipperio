@@ -44,57 +44,19 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-md-2">
-                <h6 class="customtitle">ประเทศ</h6> 
-                <ul class="nav">
-                    <li><a href="#">ไทย</a></li>
-                    <li><a href="#">ญี่ปุ่น</a></li>
-                    <li><a href="#">เกาหลี</a></li>
-                    <li><a href="#">จีน</a></li>
-                </ul>
-            </div>
-
-            <div class="col-xs-12 col-md-10">
-                <div class="row text-center">
-                    <h5 class="customtitle text-black">สินค้าพรีออเดอร์</h5>
-                    <p class="text-grey">สินค้าที่กำลังเปิดรับพรีออเดอร์ทั้งหมด</p>
-                </div>
-                <div class="row">
-                    <?php foreach ($item as $row): ?>
-                        <div class="col-xs-12 col-md-4 col-lg-3">
-                            <div class="card-campaign">
-                                <img src="<?= $row->image ?>" />
-                                <div class="row block">
-                                    <div class="">
-
-                                        <div class="col-xs-12"> 
-                                            <div class="title  "><i class="sheld"></i>&nbsp;<?= $row->title ?></div>
-                                            <div class="description"><i class="fa fa-location-arrow"></i> <u><?= $row->place ?></u></div>
-                                            <div class="row">
-                                                <div class="col-xs-6"><div class="counter" enddate="<?= $row->end ?>">0day:00:00</div></div>
-                                                <div class="col-xs-6"><div class="description"><span class="price"><?= number_format($row->price) ?> THB</span></div></div>
-                                            </div>
-
-                                            <a href="<?= base_url("item/$row->id") ?>"  class="btn btn-campaign btn-outline">สั่งเลย</a>
-                                        </div>
-                                    </div> 
-
-                                </div>
-                            </div>
-                        </div> 
-                    <?php endforeach; ?>
-
-
-                </div>
-<!--                <div class="row">
-                    <div class="col-xs-12">
-                        <button  class="btn btn-campaign more">ดูสินค้าทั้งหมด</button>
-                    </div>
-                </div>-->
-
+            <div style="max-width: 960px; margin:  auto;">
+                <!--            <div class="col-xs-12 col-md-2">
+                                <h6 class="customtitle">ประเทศ</h6> 
+                                <ul class="nav">
+                                    <li><a href="#">ไทย</a></li>
+                                    <li><a href="#">ญี่ปุ่น</a></li>
+                                    <li><a href="#">เกาหลี</a></li>
+                                    <li><a href="#">จีน</a></li>
+                                </ul>
+                            </div>-->
 
                 <div class="row text-center">
-                    <h5 class="customtitle text-black">แคมเปญที่กำลังรออเดอร์</h5>
+                    <h5 class="customtitle text-black">แคมเปญที่กำลังรอ ออเดอร์</h5>
                     <p class="text-grey">เหล่าบรรดานักช๊อปทั้งหลายที่กำลังรอหิ้วของให้ท่าน</p>
                 </div>
 
@@ -134,7 +96,7 @@
                                             </div>
                                             <div class="title"><i class="sheld"></i>&nbsp; <?= $row->title ?></div>
                                             <div class="description"><?= $row->description ?></div>
-                                            <button  class="btn btn-campaign btn-outline">ดูสินค้า</button>
+                                            <a href="<?= base_url("campaign/$row->id/$row->title") ?>" class="btn btn-campaign btn-outline">ดูสินค้า</a>
                                         </div>
                                     </div> 
 
@@ -147,11 +109,52 @@
 
 
                 </div>
-<!--                <div class="row">
-                    <div class="col-xs-12">
-                        <button  class="btn btn-campaign more">ดูแคมเปญทั้งหมด</button>
+
+                <div class="col-xs-12 ">
+                    <div class="row text-center">
+                        <h5 class="customtitle text-black">สินค้าบริการฝากซื้อ</h5>
+                        <p class="text-grey">สินค้าที่กำลังเปิดรับออเดอร์ทั้งหมด</p>
                     </div>
-                </div>-->
+                    <div class="row">
+                        <?php foreach ($item as $row): ?>
+                            <div class="col-xs-12 col-md-4 col-lg-3">
+                                <div class="card-campaign">
+                                    <img src="<?= $row->image ?>" />
+                                    <div class="row block">
+                                        <div class=""> 
+                                            <div class="col-xs-12"> 
+                                                <div class="title  "><i class="sheld"></i>&nbsp;<?= $row->title ?></div>
+                                                <div class="description"><i class="fa fa-location-arrow"></i> <u><?= $row->place ?></u></div>
+                                                <div class="row">
+                                                    <div class="col-xs-6"><div class="counter" enddate="<?= $row->end ?>">0day:00:00</div></div>
+                                                    <div class="col-xs-6"><div class="description"><span class="price"><?= number_format($row->price) ?> THB</span></div></div>
+                                                </div>
+
+                                                <a href="<?= base_url("item/$row->id/$row->title") ?>"  class="btn btn-campaign btn-outline">รายละเอียดเพิ่มเติม</a>
+                                            </div>
+                                        </div> 
+
+                                    </div>
+                                </div>
+                            </div> 
+                        <?php endforeach; ?>
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <a href="<?= base_url("items") ?>"  class="btn btn-campaign more">ดูสินค้าทั้งหมด</a>
+                        </div>
+                    </div>
+
+
+
+                    <!--                <div class="row">
+                                        <div class="col-xs-12">
+                                            <button  class="btn btn-campaign more">ดูแคมเปญทั้งหมด</button>
+                                        </div>
+                                    </div>-->
+                </div>
             </div>
         </div>
     </div>

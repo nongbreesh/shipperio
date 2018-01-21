@@ -42,49 +42,85 @@
 
         </header> 
 
-        <div class="container" style="max-width:960px;">
+        <div class="container"  >
             <div class="row"> 
                 <?php $this->load->view("profile/sidebar"); ?>
 
-                <div class="col-xs-8">
+                <div class="col-xs-9">
                     <div class="card-campaign" style="padding:15px;">
                         <h4 class="customtitle text-black">รายการสั่งสินค้า</h4> 
                         <div class="row">
                             <div class="col-xs-12" style="padding-top: 25px;">
                                 <ul class="nav nav-tabs">
                                     <li role="presentation" class="<?= $submenu == "paid" ? 'active' : ''; ?>"><a href="<?= base_url("order") ?>">ชำระเงินแล้ว</a></li>
-                                    <li role="presentation"  class="<?= $submenu == "shipping" ? 'active' : ''; ?>"><a href="<?= base_url("order/shipping") ?>">กำลังจัดส่ง</a></li>
+                                    <li role="presentation"  class="<?= $submenu == "shipping" ? 'active' : ''; ?>"><a href="<?= base_url("order/shipping") ?>">รอส่ง</a></li>
                                     <li role="presentation"  class="<?= $submenu == "recieved" ? 'active' : ''; ?>"><a href="<?= base_url("order/recieved") ?>">จัดส่งแล้ว</a></li>
+                                    <li role="presentation"  class="<?= $submenu == "cancel" ? 'active' : ''; ?>"><a href="<?= base_url("order/cancel") ?>">ถูกยกเลิก</a></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-12">
-                                <table class="table tb-cart">
-                                    <thead> 
-                                        <tr>  
-                                            <th>#</th>
-                                            <th>รายการสินค้า</th> 
-                                            <th>จำนวน</th> 
-                                            <th>ยอดรวม</th> 
-                                        </tr>
-                                    </thead>
-                                    <tbody> 
-                                        <?php foreach ($orderlist as $row): ?>
+                            <div class="col-xs-12" style="overflow-x: scroll">
+                                <?php if ($submenu == "recieved" || $submenu == "cancel"): ?>
+                                    <table class="table table-hover tb-cart">
+                                        <thead> 
                                             <tr>  
-                                                <td colspan="4"><b>#<?= $row->ref ?> เมื่อ <?= date("j F, Y H:i:s", strtotime($row->createdate)); ?></b></td> 
-                                            </tr> 
-                                            <?php foreach ($obj->orderdetail($row->id) as $row2): ?>
+                                                <th>#</th>
+                                                <th>รายการสินค้า</th> 
+                                                <th>จำนวน</th> 
+                                                <th>ยอดรวม</th> 
+                                                <th>เวลาส่ง</th> 
+                                                <th>Tracking</th> 
+                                                <th>Remark</th> 
+                                            </tr>
+                                        </thead>
+                                        <tbody>  
+                                            <?php foreach ($orderlist as $row): ?>
                                                 <tr>  
-                                                    <td><img  class="img img-rounded" style="width: 60px;" src="<?= $row2->image ?>"  ></td> 
-                                                    <td><?= $row2->title ?></td>  
-                                                    <td><?= $row2->amount ?></td> 
-                                                    <td>฿<?= number_format(($row2->price + $row2->fee) * $row2->amount, 2) ?></td> 
+                                                    <td colspan="7"><b>#<?= $row->ref ?> เมื่อ <?= date("j F, Y H:i:s", strtotime($row->createdate)); ?></b></td> 
                                                 </tr> 
-                                            <?php endforeach; ?>  
-                                        <?php endforeach; ?> 
-                                    </tbody> 
-                                </table>
+                                                <?php foreach ($obj->orderdetail($row->id, $row->orderstatus) as $row2): ?>
+                                                    <tr>  
+                                                        <td><img  class="img img-rounded" style="width: 60px;" src="<?= $row2->image ?>"  ></td> 
+                                                        <td><?= $row2->title ?></td>  
+                                                        <td><?= $row2->amount ?></td> 
+                                                        <td>฿<?= number_format(($row2->price + $row2->fee) * $row2->amount, 2) ?></td> 
+                                                        <td><?= date("j F, Y H:i:s", strtotime($row2->shipeddate)); ?></td> 
+                                                        <td><?= $row2->emstrack ?></td> 
+                                                        <td style="color:#E91E63"><?= $row2->remark ? $row2->remark : "-" ?></td> 
+                                                    </tr> 
+                                                <?php endforeach; ?>  
+                                            <?php endforeach; ?> 
+                                        </tbody> 
+                                    </table>
+                                <?php else: ?>
+                                    <table class="table table-hover tb-cart">
+                                        <thead> 
+                                            <tr>  
+                                                <th>#</th>
+                                                <th>รายการสินค้า</th> 
+                                                <th>จำนวน</th> 
+                                                <th>ยอดรวม</th> 
+                                            </tr>
+                                        </thead>
+                                        <tbody>  
+                                            <?php foreach ($orderlist as $row): ?>
+                                                <tr>  
+                                                    <td colspan="4"><b>#<?= $row->ref ?> เมื่อ <?= date("j F, Y H:i:s", strtotime($row->createdate)); ?></b></td> 
+                                                </tr> 
+                                                <?php foreach ($obj->orderdetail($row->id, $row->orderstatus) as $row2): ?>
+                                                    <tr>  
+                                                        <td><img  class="img img-rounded" style="width: 60px;" src="<?= $row2->image ?>"  ></td> 
+                                                        <td><?= $row2->title ?></td>  
+                                                        <td><?= $row2->amount ?></td> 
+                                                        <td>฿<?= number_format(($row2->price + $row2->fee) * $row2->amount, 2) ?></td> 
+                                                    </tr> 
+                                                <?php endforeach; ?>  
+                                            <?php endforeach; ?> 
+                                        </tbody> 
+                                    </table>
+                                <?php endif; ?>
+
                             </div>
                         </div>
                     </div>
@@ -105,14 +141,14 @@
         $(document).ready(function () {
             init();
         });
-        
-        
+
+
         function init() {
             $(".overlay-loader").hide();
-            
+
         }
-        
-        
+
+
     </script>
 
 </html>

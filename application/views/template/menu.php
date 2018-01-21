@@ -14,7 +14,7 @@
     <ul class="nav navbar-nav navbar-right">
 
         <?php if ($islogin): ?>
-            <li class="startusing"><a href="<?= base_url("account/$token") ?>">จัดการแคมเปญ</a></li>
+            <li class="startusing"><a href="<?= base_url("campaignmgr") ?>">จัดการแคมเปญ</a></li>
             <li><a href="<?= base_url('cart') ?>" style="color:#000" ><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart(<span id="cartnum"></span>)</a></li>
             <li>
                 <a href="<?= base_url("profile") ?>" style="padding: 7px 0px 0px 10px;" ><img width="40" class="img img-circle" src="http://graph.facebook.com/<?= $user['fbid'] ?>/picture?type=square" /></a>

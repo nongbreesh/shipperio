@@ -52,7 +52,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-12   text-grey text-center">
-                                    <h2 class="">แพลตฟอร์มรับหิ้วสินค้าแบบใหม่</h2>
+                                    <h2 class="">แพลตฟอร์มฝากซื้อสินค้า</h2>
                                     <p class="">พบกับประสบการณ์การช๊อบปิ้งแบบใหม่ที่นี่ 
                                         <br>
                                         สะดวกปลอดภัย ไม่ต้องกังวลโดนโกง</p>
@@ -91,7 +91,7 @@
                     <img style="width:100%" src="<?= base_url("res/img/shipperio-flow.png") ?>" />
                 </div>
                 <div class="col-lg-6   text-grey text-left">
-                    <h5 class="" style="color:#1A53F0;    font-family: 'Prompt', Arial, sans-serif;margin-top: 90px;">ชำระเงินผ่านบัตรเครดิต</h2>
+                    <h5 class="" style="color:#34495e;    font-family: 'Prompt', Arial, sans-serif;margin-top: 90px;">ชำระเงินผ่านบัตรเครดิต</h2>
                         <p class="">ปลอดภัยไปอีกขั้นเมื่อชำระเงินผ่านบัตรเครดิตเข้าบัญชี Shipper โดยตรง ยอดเงินจะถูกหักให้ผู้ขายสินค้าก็ต่อเมื่อ ผู้รับสินค้าได้รับสินค้าเรียบร้อย เพื่อป้องกันปัญหาผู้รับหิ้วสินค้าโกง 
                             <br/>โดยสังเกตุเครื่องหมาย   <img style="width:30px" src="<?= base_url("res/img/shield.png") ?>" /> ที่หน้าแคมเปญ</p>
                 </div>
@@ -107,62 +107,21 @@
                     </div> 
                     <div class="col-xs-12 col-lg-10">
                         <div class="row">
-                            <div class="col-xs-6 col-md-3">
-                                <div class="card-box">
-                                    <div class="row">
-                                        <div class="col-xs-4">
-                                            <img class="img-circle" style="width:100%" src="https://www.freelancebay.com/user_files/thumbs/user/2018/01/avatar/210583_80_50x50.jpg" />
-                                        </div>
-                                        <div class="col-xs-8">
-                                            <h5>Pei jang kyo</h5>
-                                            <i class="fa fa-circle" aria-hidden="true"></i>&nbsp; สมัครเมื่อ 50 นาทีที่แล้ว
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-xs-6 col-md-3">
-                                <div class="card-box">
-                                    <div class="row">
-                                        <div class="col-xs-4">
-                                            <img class="img-circle" style="width:100%" src="https://www.freelancebay.com/user_files/thumbs/user/2018/01/avatar/210583_80_50x50.jpg" />
-                                        </div>
-                                        <div class="col-xs-8">
-                                            <h5>Pei jang kyo</h5>
-                                            <i class="fa fa-circle" aria-hidden="true"></i>&nbsp; สมัครเมื่อ 50 นาทีที่แล้ว
+                            <?php foreach ($newuser as $row): ?>
+                                <div class="col-xs-6 col-md-3">
+                                    <div class="card-box">
+                                        <div class="row">
+                                            <div class="col-xs-4">
+                                                <img class="img-circle" style="width:100%" src="http://graph.facebook.com/<?= $row->fbid ?>/picture?type=square" />
+                                            </div>
+                                            <div class="col-xs-8">
+                                                <h5><?= $row->firstname . " " . $row->lastname ?></h5>
+                                                <i class="fa fa-circle" aria-hidden="true"></i>&nbsp; สมัครเมื่อ <?= $obj->time_elapsed_string($row->createdate) ?>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="col-xs-6 col-md-3">
-                                <div class="card-box">
-                                    <div class="row">
-                                        <div class="col-xs-4">
-                                            <img class="img-circle" style="width:100%" src="https://www.freelancebay.com/user_files/thumbs/user/2018/01/avatar/210583_80_50x50.jpg" />
-                                        </div>
-                                        <div class="col-xs-8">
-                                            <h5>Pei jang kyo</h5>
-                                            <i class="fa fa-circle" aria-hidden="true"></i>&nbsp; สมัครเมื่อ 50 นาทีที่แล้ว
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-xs-6 col-md-3">
-                                <div class="card-box">
-                                    <div class="row">
-                                        <div class="col-xs-4">
-                                            <img class="img-circle" style="width:100%" src="https://www.freelancebay.com/user_files/thumbs/user/2018/01/avatar/210583_80_50x50.jpg" />
-                                        </div>
-                                        <div class="col-xs-8">
-                                            <h5>Pei jang kyo</h5>
-                                            <i class="fa fa-circle" aria-hidden="true"></i>&nbsp; สมัครเมื่อ 50 นาทีที่แล้ว
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                            <?php endforeach; ?> 
                         </div>
                     </div>
                 </div>
@@ -175,13 +134,13 @@
                 <div class="row">
                     <div class="col-xs-6 col-md-4">
                         <h6 class="customtitle text-blue">นักช๊อป</h6>
-                        <h4 class=" text-blue">99,999</h4>
+                        <h4 class=" text-blue"><?= number_format(count($alluser)) ?></h4>
                         <h6 class="customtitle  text-blue">คน</h6>
                     </div>
 
                     <div class="col-xs-6 col-md-4">
-                        <h6 class="customtitle  text-blue">สินค้า</h6>
-                        <h4 class="text-blue">99,999</h4>
+                        <h6 class="customtitle  text-blue">แคมเปญ</h6>
+                        <h4 class="text-blue"><?= number_format(count($allcampaign)) ?></h4>
                         <h6 class="customtitle text-blue">รายการ</h6>
                     </div>
 
@@ -197,21 +156,19 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h4 style="font-family: 'Prompt', Arial, sans-serif;">ค่าบริการเพียง</h4> <h1 style="color:#1A53F0">3%</h1> ต่อแคมเปญ สำหรับผู้รับหิ้ว
+                    <h4 style="font-family: 'Prompt', Arial, sans-serif;">ค่าบริการเพียง</h4> <h1 style="color:#1351ec">3%</h1> ต่อรายการ สำหรับผู้รับหิ้ว
                     <br/>
                     <br/>
                     <div style="max-width:700px;margin:0 auto;">
                         <h5 style="    font-family: 'Prompt', Arial, sans-serif;">ตัวอย่างการคำนวณค่าบริการ</h5>
                         <p style="text-align:left">
-                            เราคิดค่าบริการในการทำรายการที่ 2%  ตัวอย่างเช่น เมื่อมียอดสั่งซื้อรวมทั้งหมดต่อแคมเปญ 1,000 บาทจากผู้ซื้อ ค่าบริการจะเท่ากับ 30 บาท (คิดจาก 3%) 
-                            และเมื่อรวมกับภาษีมูลค่าเพิ่ม 7% (คิดเป็น 2.1 บาท) ค่าบริการสุทธิของรายการนี้คือ 32.10 บาท 
-                            ซึ่งเราจะหักออกจากยอด 1,000 บาท และจ่ายเงินจำนวน 967.90 บาทไปยังบัญชีเจ้าของแคมเปญ
+                            เราคิดค่าบริการในการทำรายการที่ 3%  ตัวอย่างเช่น เมื่อมียอดสั่งซื้อสินค้า A 1,000 บาทจากผู้ซื้อ ค่าบริการจะเท่ากับ 30 บาท (คิดจาก 3%)  
+                            ซึ่งเราจะหักออกจากยอด 1,000 บาท และจ่ายเงินจำนวน 970.00 บาทไปยังบัญชีเจ้าของแคมเปญ
                         </p>
                         <div class="code text text-left"> 
                             Charge Amount: 1,000.00 +  
                             <br/>Shipperio Fee:        30.00 -  
-                            <br/>Fee VAT:           2.10 -
-                            <br/>Your Balance:    967.90
+                            <br/>Your Balance:    970.00
                         </div>
                     </div>
                 </div>
@@ -223,7 +180,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <a class="startusing" href="<?= base_url("login") ?>">เริ่มสร้างแคมเปญ!</a>
+                    <a class="startusing" href="<?= base_url("campaignmgr") ?>">เริ่มสร้างแคมเปญ!</a>
                 </div>
             </div>
         </div>

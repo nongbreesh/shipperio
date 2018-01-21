@@ -58,10 +58,20 @@ $route['cart'] = "home/cart";
 $route['checkout'] = "home/checkout";
 $route['ordercompleted'] = "home/ordercompleted";
 $route['campaign'] = "home/campaign";
-$route['item/(:any)'] = "home/item/$1";
+$route['item/(:any)/(:any)'] = "home/item/$1";
+$route['items'] = "home/items";
+
 $route['removecart/(:any)'] = "home/removecart/$1";
 $route['order'] = "profile/order";
 $route['order/(:any)'] = "profile/order/$1";
 $route['shippingaddress'] = "profile/shippingaddress";
 $route['phone'] = "profile/phone";
+$route['finance'] = "profile/finance";
+$route['withdrawals'] = "profile/withdrawals";
+$route['withdrawals/(:any)'] = "profile/withdrawals/$1";
 
+$route['campaignmgr'] = "campaignmgr/index";
+$route['campaignmgr/ordered'] = "campaignmgr/ordered";
+$route['campaignmgr/shipped'] = "campaignmgr/shipped";
+$route['campaignmgr/income'] = "campaignmgr/income";
+$route['campaign/(:any)/(:any)'] = "home/campaignitem/$1/$2";

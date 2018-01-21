@@ -10,7 +10,16 @@ class Update_model extends CI_Model {
             return false;
         endif;
     }
-    
+
+    function finance($input) {
+        $this->db->where('userid', $input['userid']);
+        if ($this->db->update('finance', $input)):
+            return true;
+        else:
+            return false;
+        endif;
+    }
+
     public function address($input) {
         $this->db->where('id', $input['id']);
         if ($this->db->update('address', $input)):
@@ -157,8 +166,7 @@ class Update_model extends CI_Model {
     }
 
     function orderdetail($input) {
-        $this->db->where('orderid', $input['orderid']);
-        $this->db->where('itemid', $input['itemid']);
+        $this->db->where('id', $input['id']);
         if ($this->db->update('orderdetail', $input)):
             return true;
         else:

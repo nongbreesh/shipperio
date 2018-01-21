@@ -60,7 +60,7 @@
 
         </header> 
 
-        <div class="container" style="max-width:960px;">
+        <div class="container" >
             <div class="row"> 
                 <?php $this->load->view("profile/sidebar"); ?>
 

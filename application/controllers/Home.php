@@ -22,11 +22,57 @@ class Home extends CI_Controller {
         $data["user"] = $this->user->get_account_cookie();
         // print_r($data["user"]);
         $data["token"] = $data["user"] ['token'];
+        $data["alluser"] = $this->get->alluser();
+        $data["newuser"] = $this->get->newuser();
+
+        $data["allcampaign"] = $this->get->allcampaign();
         $data["islogin"] = $this->user->is_login();
         $data["menu"] = "home";
         $this->load->view('template/index', $data);
     }
 
+    function time_elapsed_string($datetime, $full = false) {
+        $now = new DateTime;
+        $ago = new DateTime($datetime);
+        $diff = $now->diff($ago);
+
+        $diff->w = floor($diff->d / 7);
+        $diff->d -= $diff->w * 7;
+
+        $string = array(
+            'y' => 'year',
+            'm' => 'month',
+            'w' => 'week',
+            'd' => 'day',
+            'h' => 'hour',
+            'i' => 'minute',
+            's' => 'second',
+        );
+        foreach ($string as $k => &$v) {
+            if ($diff->$k) {
+                $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+            } else {
+                unset($string[$k]);
+            }
+        }
+
+        if (!$full)
+            $string = array_slice($string, 0, 1);
+        return $string ? implode(', ', $string) . ' ago' : 'just now';
+    }
+
+    
+    public function items() {
+        $data["obj"] = $this;
+        $data["user"] = $this->user->get_account_cookie();
+        $data["token"] = $data["user"] ['token'];
+        $data["menu"] = "campaign";
+        $data["item"] = $this->get->items("",true); 
+        $data["islogin"] = $this->user->is_login();
+        $this->load->view('campaign/items', $data);
+    }
+
+    
     public function campaign() {
         $data["obj"] = $this;
         $data["user"] = $this->user->get_account_cookie();
@@ -36,6 +82,17 @@ class Home extends CI_Controller {
         $data["campaign"] = $this->get->campaign();
         $data["islogin"] = $this->user->is_login();
         $this->load->view('campaign/index', $data);
+    }
+
+    public function campaignitem($id,$title) {
+        $data["obj"] = $this;
+        $data["user"] = $this->user->get_account_cookie();
+        $data["token"] = $data["user"] ['token'];
+        $data["menu"] = "campaign";
+        $data["item"] = $this->get->items($id);
+        $data["campaign"] = $this->get->campaign($id);
+        $data["islogin"] = $this->user->is_login();
+        $this->load->view('campaign/campaignitem', $data);
     }
 
     public function item($id) {
