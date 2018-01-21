@@ -3,9 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <title>แพลตฟอร์มรับหิ้วสินค้าทั่วโลก</title>
+        <title>shipperio.com : แพลตฟอร์มฝากซื้อสินค้าทั่วโลก</title>
         <meta name="description" content="รับหิ้วสินค้า">
-        <meta name="keywords" content="เว็บสำเร็จรูป,บิลออนไลน์,ขายของผ่านไลน์,ขายของออนไลน์">
+        <meta name="keywords" content="รับหิ้ว,ฝากซื้อ,ขายของออนไลน์">
         <link href="https://fonts.googleapis.com/css?family=Prompt" rel="stylesheet">
         <link href="<?= base_url("res/css/font-awesome.min.css") ?>" rel="stylesheet" type="text/css"/>
         <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url("res/fav/favicon-16x16.png") ?>">
@@ -78,7 +78,7 @@
                                 <?php if ($submenu == "shipped"): ?>
                                     <?php $this->load->view('campaignmgr/shipped', $data); ?>
                                 <?php endif; ?>
-                                  <?php if ($submenu == "cancel"): ?>
+                                <?php if ($submenu == "cancel"): ?>
                                     <?php $this->load->view('campaignmgr/cancel', $data); ?>
                                 <?php endif; ?>
                             </div>
@@ -93,10 +93,10 @@
         <?php $this->load->view('template/footer'); ?>
 
     </body>
-<script type="text/javascript" src="<?= base_url("res/js/jquery-3.2.0.min.js") ?>"></script> 
-<script src="https://npmcdn.com/bootstrap@4.0.0-alpha.5/dist/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="<?= base_url("res/bootstrap/js/bootstrap.min.js") ?>"></script>
-<script src="<?= base_url("res/bootstrap/js/modal.js") ?>" type="text/javascript"></script>
+    <script type="text/javascript" src="<?= base_url("res/js/jquery-3.2.0.min.js") ?>"></script> 
+    <script src="https://npmcdn.com/bootstrap@4.0.0-alpha.5/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?= base_url("res/bootstrap/js/bootstrap.min.js") ?>"></script>
+    <script src="<?= base_url("res/bootstrap/js/modal.js") ?>" type="text/javascript"></script>
     <script>
         $(document).ready(function () {
             init();

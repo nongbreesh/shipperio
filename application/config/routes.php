@@ -60,6 +60,7 @@ $route['ordercompleted'] = "home/ordercompleted";
 $route['campaign'] = "home/campaign";
 $route['item/(:any)/(:any)'] = "home/item/$1";
 $route['items'] = "home/items";
+$route['authentoken'] = "campaignmgr/gentokenqr";
 
 $route['removecart/(:any)'] = "home/removecart/$1";
 $route['order'] = "profile/order";

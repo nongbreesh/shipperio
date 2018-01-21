@@ -3,9 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <title>แพลตฟอร์มรับหิ้วสินค้าทั่วโลก</title>
+        <title>shipperio.com : แพลตฟอร์มฝากซื้อสินค้าทั่วโลก</title>
         <meta name="description" content="รับหิ้วสินค้า">
-        <meta name="keywords" content="เว็บสำเร็จรูป,บิลออนไลน์,ขายของผ่านไลน์,ขายของออนไลน์">
+        <meta name="keywords" content="รับหิ้ว,ฝากซื้อ,ขายของออนไลน์">
         <link href="https://fonts.googleapis.com/css?family=Prompt" rel="stylesheet">
         <link href="<?= base_url("res/css/font-awesome.min.css") ?>" rel="stylesheet" type="text/css"/>
         <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url("res/fav/favicon-16x16.png") ?>">
@@ -93,7 +93,7 @@
                 <div class="col-lg-6   text-grey text-left">
                     <h5 class="" style="color:#34495e;    font-family: 'Prompt', Arial, sans-serif;margin-top: 90px;">ชำระเงินผ่านบัตรเครดิต</h2>
                         <p class="">ปลอดภัยไปอีกขั้นเมื่อชำระเงินผ่านบัตรเครดิตเข้าบัญชี Shipper โดยตรง ยอดเงินจะถูกหักให้ผู้ขายสินค้าก็ต่อเมื่อ ผู้รับสินค้าได้รับสินค้าเรียบร้อย เพื่อป้องกันปัญหาผู้รับหิ้วสินค้าโกง 
-                            <br/>โดยสังเกตุเครื่องหมาย   <img style="width:30px" src="<?= base_url("res/img/shield.png") ?>" /> ที่หน้าแคมเปญ</p>
+                          
                 </div>
             </div>
         </div>
@@ -145,7 +145,7 @@
                     </div>
 
                     <div class="col-md-4 hidden-xs"> 
-                        <a class="btn-blue" style="margin-top: 45px;" href="<?= base_url("login") ?>">ดูสินค้าทั้งหมด!</a>
+                        <a class="btn-blue" style="margin-top: 45px;" href="<?= base_url("items") ?>">ดูสินค้าทั้งหมด!</a>
                     </div>
                 </div>
             </div>

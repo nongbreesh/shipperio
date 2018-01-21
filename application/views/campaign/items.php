@@ -60,7 +60,7 @@
                                     <div class="row block">
                                         <div class=""> 
                                             <div class="col-xs-12"> 
-                                                <div class="title  "><i class="sheld"></i>&nbsp;<?= $row->title ?></div>
+                                                <div class="title  "><?= $row->title ?></div>
                                                 <div class="description"><i class="fa fa-location-arrow"></i> <u><?= $row->place ?></u></div>
                                                 <div class="row">
                                                     <div class="col-xs-6"><div class="counter" enddate="<?= $row->end ?>">0day:00:00</div></div>

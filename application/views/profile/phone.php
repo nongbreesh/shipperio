@@ -3,9 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <title>แพลตฟอร์มรับหิ้วสินค้าทั่วโลก</title>
+        <title>shipperio.com : แพลตฟอร์มฝากซื้อสินค้าทั่วโลก</title>
         <meta name="description" content="รับหิ้วสินค้า">
-        <meta name="keywords" content="เว็บสำเร็จรูป,บิลออนไลน์,ขายของผ่านไลน์,ขายของออนไลน์">
+        <meta name="keywords" content="รับหิ้ว,ฝากซื้อ,ขายของออนไลน์">
         <link href="https://fonts.googleapis.com/css?family=Prompt" rel="stylesheet">
         <link href="<?= base_url("res/css/font-awesome.min.css") ?>" rel="stylesheet" type="text/css"/>
         <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url("res/fav/favicon-16x16.png") ?>">
@@ -160,7 +160,7 @@
 
             function init() {
                 $(".overlay-loader").hide();
-                isSameNum(); 
+                isSameNum();
 
                 // [START appVerifier]
                 window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('sign-in-button', {
@@ -245,7 +245,7 @@
             /**
              * Updates the state of the Verify code form.
              */
-            function updateVerificationCodeFormUI(_bool) { 
+            function updateVerificationCodeFormUI(_bool) {
                 if (_bool) {
                     $("#modalAdded").modal("show");
                 } else {

@@ -37,11 +37,12 @@ class Register extends CI_Controller {
                 $data["emaildoesexit"] = true;
             } else {
                 $password = $this->input->post('password');
-                $token = $this->common->getToken(10);
+                $token = $this->common->getToken(20);
                 $input = array(
                     'email' => $email,
                     'firstname' => $firstname,
                     'lastname' => $lastname,
+                    'token' => $token,
                     'image' => base_url("public/avatar.png"),
                     'password' => md5($password),
                     'fbid' => $fbid,

@@ -10,7 +10,7 @@ class Campaignmgr extends CI_Controller {
         $this->load->model('Select_model', 'get');
         $this->load->model('Update_model', 'set');
         $this->load->model('User_model', 'user');
-
+        $this->load->library('ciqrcode');
         $this->load->library('upload');
         $this->load->library('common');
         $this->load->library('lineapi');
@@ -19,16 +19,26 @@ class Campaignmgr extends CI_Controller {
 
     public function index() {
         $data["obj"] = $this;
+
+        $config['cacheable'] = false; //boolean, the default is true 
+        $this->ciqrcode->initialize($config);
+
         $data["user"] = $this->user->get_account_cookie();
-        // print_r($data["user"]);
         $data["token"] = $data["user"] ['token'];
         $data["islogin"] = $this->user->is_login();
         $data["menu"] = "";
         $data["submenu"] = "campaign";
         $data["data"] = $data;
-
-
         $this->load->view('campaignmgr/index', $data);
+    }
+
+    public function gentokenqr() {
+        $data["user"] = $this->user->get_account_cookie();
+        header("Content-Type: image/png");
+        $params['data'] = "auth " . $data["user"]["token"];
+        $params['level'] = 'H';
+        $params['size'] = 10;
+        $this->ciqrcode->generate($params);
     }
 
     public function ordered() {
